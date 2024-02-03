@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+        <record id="base.CUP" model="res.currency">
+            <field name="name">CUP</field>
+            <field name="symbol">CUP</field>
+            <field name="rounding">0.01</field>
+            <field name="active" eval="True"/>
+            <field name="currency_unit_label">Pesos</field>
+            <field name="currency_subunit_label">Centavos</field>
+            <field name="position">after</field>
+        </record>
+
+        <record id="CUC" model="res.currency">
+            <field name="name">CUC</field>
+            <field name="symbol">CUC</field>
+            <field name="rounding">0.01</field>
+            <field name="active" eval="True"/>
+            <field name="currency_unit_label">Pesos</field>
+            <field name="currency_subunit_label">Centavos</field>
+            <field name="position">after</field>
+        </record>
+    </data>
+</odoo>

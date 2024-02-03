@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="report_client_file_proform">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <style rel="stylesheet">
+                    .table-condensed2 > thead > tr > th,
+                    .table-condensed2 > tbody > tr > th,
+                    .table-condensed2 > tfoot > tr > th,
+                    .table-condensed2 > thead > tr > td,
+                    .table-condensed2 > tbody > tr > td,
+                    .table-condensed2 > tfoot > tr > td {
+                        padding: 2px;
+                    }
+                </style>
+                <script>
+                    window.print();
+                </script>
+                <div class="page" style="font-size:10px">
+                    <table class="table table-condensed2 table-bordered">
+                        <tr>
+                            <td class="text-center" colspan="6"><strong>FICHA DE CLIENTE</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><strong>Nombre de la entidad:</strong></td>
+                            <td colspan="3" width="25%"><strong>Fecha de Acreditación:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td><strong>Día:</strong> </td>
+                            <td><strong>Mes:</strong></td>
+                            <td><strong>Año:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><strong>Dirección:</strong></td>
+                            <td colspan="3" class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Teléfono:</strong></td>
+                            <td colspan="2"><strong>Email:</strong></td>
+                            <td colspan="3"><strong>Fax:</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Código Entidad:</strong></td>
+                            <td><strong>Organismo o Ministerio:</strong></td>
+                            <td><strong>Licencia Operación Divisas:</strong></td>
+                            <td colspan="3"><strong>NIT:</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span>&amp;nbsp;</span></td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cuenta Bancaria CUC/USD:</strong></td>
+                            <td><strong>Sucursal CUC/USD:</strong></td>
+                            <td colspan="4"><strong>Dirección Sucursal CUC/USD:</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span>&amp;nbsp;</span></td>
+                            <td></td>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cuenta Bancaria CUP:</strong></td>
+                            <td><strong>Sucursal CUP:</strong></td>
+                            <td colspan="4"><strong>Dirección Sucursal CUP:</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span>&amp;nbsp;</span></td>
+                            <td></td>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><strong>Personas autorizadas a solicitar servicios y firmar facturas:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Nombre y Apellidos:</strong></td>
+                            <td ><strong>Cargo:</strong></td>
+                            <td ><strong>Firma:</strong></td>
+                            <td colspan="2"><strong>C. Identidad:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">1.</td>
+                            <td ></td>
+                            <td ></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">2.</td>
+                            <td ></td>
+                            <td ></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">3.</td>
+                            <td ></td>
+                            <td ></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">4.</td>
+                            <td ></td>
+                            <td ></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><strong>Personas autorizadas a firmar conciliaciones:</strong></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><strong>Nombre y Apellidos:</strong></td>
+                            <td ><strong>Cargo:</strong></td>
+                            <td ><strong>Firma:</strong></td>
+                            <td colspan="2"><strong>C. Identidad:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">1.</td>
+                            <td ></td>
+                            <td ></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">2.</td>
+                            <td ></td>
+                            <td ></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">3.</td>
+                            <td ></td>
+                            <td ></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><strong>Representante de la entidad designado para firmar contrato:</strong></td>
+                            <td colspan="2"><strong>Cargo que ocupa:</strong></td>
+                        </tr>
+                         <tr>
+                            <td colspan="4"><span>&amp;nbsp;</span></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><strong>El director de la entidad o su equivalente declara, apercibido de la responsabilidad en que
+                                incurre que, todos los datos aquí plasmados son ciertos y que cualquier variación en
+                            alguno de ellos deberá comunicarse de inmediato a <span t-field="o.company_id.name"></span>, para evitar
+                            cualquier consecuencia que de ello pueda derivarse.</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><strong>Nombre y apellidos del director de la entidad o su equivalente:</strong></td>
+                            <td colspan="2"><strong>Cuño:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><span>&amp;nbsp;</span></td>
+                            <td rowspan="3" colspan="2"> </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Carné de identidad:</strong></td>
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Firma:</strong></td>
+                            <td colspan="3"> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><strong>Documentos que deben acompañar a este modelo para conformar el expediente del cliente:</strong>
+                            <ol class="list-unstyled">
+                                <li>1. Resolución o Escritura de Constitución de la entidad.</li>
+                                <li>2. Escritura contentiva del objeto social.</li>
+                                <li>3. Licencia del banco Central de Cuba para operar en divisas.</li>
+                                <li>4. Certificado Comercial en CUC.</li>
+                                <li>5. Autorización Comercial para operar en MN.</li>
+                                <li>6. Resolución de Nombramiento del Director de la entidad.</li>
+                                <li>7. Resolución que faculta a la persona designada para firmar el Contrato.</li>
+                            </ol>
+                                <strong>Nota:</strong> Estos documentos para que posean fuera legal deben ser acompañados a través de fotocopias debidamente certificadas o por el correspondiente Certifico del Asesor Jurídico de la Entidad.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</odoo>

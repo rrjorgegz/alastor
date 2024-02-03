@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <!--Firmas Autorizadas-->
+        <record model="ir.ui.view" id="authorized_signature_form_view">
+            <field name='name'>authorized.signature.form</field>
+            <field name="model">authorized.signature</field>
+            <field name="arch" type="xml">
+                <form string="Firmas form">
+                    <sheet>
+                        <group colspan="3" col="1">
+                            <group name="left" string="">
+                                <field name="name"/>
+                                <field name="dni"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="authorized_signature_tree_view">
+            <field name="name">authorized.signature.tree</field>
+            <field name="model">authorized.signature</field>
+            <field name="arch" type="xml">
+                <tree string="Lista de Firmas Autorizadas">
+                    <field name="name"/>
+                    <field name="dni"/>
+                </tree>
+            </field>
+        </record>
+        <!--Firmas Autorizadas-->
+        <record model="ir.actions.act_window" id="authorized_signature_list_action">
+            <field name="name">Firmas Autorizadas</field>
+            <field name="res_model">authorized.signature</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_authorized_signature" name="Firmas Autorizadas"
+            parent="menu_contracts_root" action="authorized_signature_list_action" sequence="7" />
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+		<record id="bank_bandec" model="res.bank">
+            <field name="name">Banco de Crédito y Comercio</field>
+            <field name="bic">BANDEC</field>
+        </record>
+        <record id="bank_bpa" model="res.bank">
+            <field name="name">Banco Popular de Ahorro</field>
+            <field name="bic">BPA</field>
+        </record>
+        <record id="bank_bm" model="res.bank">
+            <field name="name">Banco Metropolitano</field>
+            <field name="bic">BM</field>
+        </record>
+        <record id="bank_bfi" model="res.bank">
+            <field name="name">Banco Financiero Internacional</field>
+            <field name="bic">BFI</field>
+        </record>
+        <record id="bank_bicsa" model="res.bank">
+            <field name="name">Banco Internacional de Comercio SA</field>
+            <field name="bic">BICSA</field>
+        </record>
+	</data>
+</odoo>

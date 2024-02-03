@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <!--Organismos-->
+        <record model="ir.ui.view" id="organism_form_view">
+            <field name='name'>organism.form</field>
+            <field name="model">organism</field>
+            <field name="arch" type="xml">
+                <form string="Organismos form">
+                    <sheet>
+                        <group colspan="3" col="1">
+                            <group name="left" string="">
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="organism_tree_view">
+            <field name="name">organism.tree</field>
+            <field name="model">organism</field>
+            <field name="arch" type="xml">
+                <tree string="Lista de Organismos">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <!--Organismos-->
+        <record model="ir.actions.act_window" id="organism_list_action">
+            <field name="name">Organismos</field>
+            <field name="res_model">organism</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_organism" name="Organismos"
+            parent="menu_contracts_root" action="organism_list_action" sequence="8" />
+    </data>
+</odoo>

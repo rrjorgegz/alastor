@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- Frame Contract -->
+        <record id="view_frame_contract_sales_tree" model="ir.ui.view">
+            <field name="name">frame.contract.sales.tree</field>
+            <field name="model">partner.sale.frame.contract</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state == 'active'" decoration-success="state == 'approved'" decoration-muted="state in ('done','rejected')">
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="number"/>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="activation_date"/>
+                    <field name="expiration_date"/>
+                    <field name="validity_date_progress" widget="progressbar"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sale_frame_contract_kanban" model="ir.ui.view">
+            <field name="name">sale.frame.contract.kanban</field>
+            <field name="model">partner.sale.frame.contract</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="number"/>
+                    <field name="partner_id"/>
+                    <field name="state"/>
+                    <field name="is_late"/>
+                    <field name="warning_msg" />
+                    <field name="validity_date_progress"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="row mb4">
+                                    <div class="col-6">
+                                        <strong><span><t t-esc="record.number.value"/></span></strong>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <strong><t t-esc="record.partner_id.value"/></strong>
+                                    </div>
+                                </div>
+                                <div class="row mb4">
+                                    <div class="col-12">
+                                        <span><t t-esc="record.name.value"/></span>
+                                    </div>                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span t-if="record.is_late.raw_value" t-att-title="record.warning_msg.value" t-att-alt="record.warning_msg.value" class="fa fa-clock-o text-warning" />
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="float-right text-right">
+                                            <field name="state" widget="label_selection" options="{'classes': {'proform': 'primary', 'active': 'success', 'done': 'muted', 'rejected': 'danger', 'scheduled': 'info', 'resent': 'warning'}}"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div t-if="record.state.raw_value=='active'" class="container">
+                                    <field name="validity_date_progress" widget="progressbar"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_frame_contract_sales_graph" model="ir.ui.view">
+            <field name="name">frame.contract.sales.graph</field>
+            <field name="model">partner.sale.frame.contract</field>
+            <field name="arch" type="xml">
+                <graph string="Contratos marco" type="pivot">
+                    <field name="partner_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_sale_frame_contract_search" model="ir.ui.view">
+			<field name="name">sale.frame.contract.search</field>
+			<field name="model">partner.sale.frame.contract</field>
+			<field name="arch" type="xml">
+				<search>
+					<filter string="Borrador" name="state_draft"
+						help="Contratos marco en estado Borrador" domain="[('state','=','draft')]" />
+					<filter string="Proforma" name="state_proform"
+						help="Contratos marco en estado Proforma" domain="[('state','=','proform')]" />
+					<filter string="Aprobado" name="state_approved"
+						help="Contratos marco en estado Aprobado" domain="[('state','=','approved')]" />
+					<filter string="Activo" name="state_active"
+						help="Contratos marco en estado Activo" domain="[('state','=','active')]" />
+					<filter string="Cerrado" name="state_close"
+						help="Contratos marco en estado Cerrado" domain="[('state','=','done')]" />
+					<filter string="Rechazado" name="state_rejected"
+						help="Contratos marco en estado Rechazado" domain="[('state','=','rejected')]" />
+					<separator orientation="vertical" />
+                    <field name="client_ref"/>
+					<field name="emission_date" />
+					<field name="activation_date" />
+                    <field name="expiration_date" string="Fecha de expiración mínima" filter_domain="[('expiration_date','&gt;=',self)]"/>
+                    <field name="expiration_date" string="Fecha de expiración máxima" filter_domain="[('expiration_date','&lt;=', (datetime.datetime.strptime(self,'%%Y-%%m-%%d') + datetime.timedelta(1)).strftime('%%Y-%%m-%%d'))]"/>
+					<field name="number"/>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="user_id"/>
+					<newline/>
+					<group string="Agrupar por...">
+                        <filter string="Cliente" help="Cliente" name="group_by_partner_id" context="{'group_by':'partner_id'}"/>
+                        <filter string="Fecha de emisión" help="Fecha de emisión" name="group_by_emission_date" context="{'group_by':'emission_date'}" />
+                        <filter string="Fecha de aprobación" help="Fecha de aprobación" name="group_by_approved_date" context="{'group_by':'approved_date'}" />
+                        <filter string="Fecha de activación" help="Fecha de activación" name="group_by_activation_date" context="{'group_by':'activation_date'}" />
+                        <filter string="Fecha de expiración" help="Fecha de expiración" name="group_by_expiration_date" context="{'group_by':'expiration_date'}" />
+                        <filter string="Estado" help="Estado" name="group_by_state" context="{'group_by':'state'}"/>
+                    </group>
+				</search>
+			</field>
+		</record>
+
+        <record id="view_frame_contract_sales_form" model="ir.ui.view">
+            <field name="name">frame.contract.sales.form</field>
+            <field name="model">partner.sale.frame.contract</field>
+            <field name="arch" type="xml">
+               <form string="Contrato marco">
+                    <header>
+                        <button name="case_proform" string="Proforma" type="object"
+                                help="Proforma" class="oe_highlight" states="draft"
+                                groups="alastor_partner_contract.contract_sales_specialist,
+                                alastor_partner_contract.contract_sales_manager"/>
+                        <button name="case_approved" string="Aprobar" type="object"
+                                help="Aprobar" class="oe_highlight" states="proform"
+                                groups="alastor_partner_contract.contract_sales_specialist,
+                                alastor_partner_contract.contract_sales_manager"/>
+                        <button name="case_active" string="Activar" type="object"
+                                help="Activar" class="oe_highlight" states="approved"
+                                groups="alastor_partner_contract.contract_sales_specialist,
+                                alastor_partner_contract.contract_sales_manager"
+                                />
+                        <button name="case_close" string="Cerrar" type="object"
+                                help="Cerrar" class="oe_highlight" states="active"
+                                groups="alastor_partner_contract.contract_sales_specialist,
+                                alastor_partner_contract.contract_sales_manager"
+                                />
+                        <button name="case_rejected" string="Rechazar" type="object"
+                                help="Marcar este contrato marco como rechazado por el cliente" class="oe_highlight" states="proform"
+                                groups="alastor_partner_contract.contract_sales_specialist,
+                                alastor_partner_contract.contract_sales_manager"
+                                />
+                        <button name="case_reset" string="Volver a Borrador" type="object"
+                                help="Volver a borrador" class="oe_button" states="proform,approved,rejected,done"
+                                groups="alastor_partner_contract.contract_sales_specialist,
+                                alastor_partner_contract.contract_sales_manager"
+                                />
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,proform,approved,rejected,active,done" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="action"
+                            name="%(action_sale_contract_all)d"
+                            icon="fa-paperclip"
+                            groups="alastor_partner_contract.contract_sales_visor"
+                            context="{'search_default_parent_id': active_id}" >
+                                <field string="Contratos" name="contract_count" widget="statinfo"/>
+                            </button>                   
+
+                            <button class="oe_stat_button" type="action"
+                            name="%(action_sale_supplement_all)d"
+                            icon="fa-paperclip"
+                            groups="alastor_partner_contract.contract_sales_visor"
+                            context="{'search_default_frame_parent_id': active_id}" >
+                                <field string="Suplementos" name="supplement_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="number"/>
+                                <field name="partner_id"/>
+                            </group>
+                            <group>
+                                <field name="company_id"
+                                    groups="base.group_multi_company"
+                                    widget="selection"/>
+                                <field name="client_ref"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Fechas">
+                                <field name="emission_date"/>
+                                <field name="approved_date" />
+                                <field name="rejected_date" />
+                                <field name="activation_date"/>
+                                <field name="expiration_date"/>                                
+                                <field name="close_date"/>
+                            </group>
+                            <group string="Término">
+                                <field name="term_type" />
+                                <label for="term" attrs="{'invisible':[('term_type','!=','fixed')]}"/>                              
+                                <div class="o_row" name="term" attrs="{'invisible':[('term_type','!=','fixed')]}">                                    
+                                    <field name="term" />
+                                    <field name="term_uom" />
+                                </div>
+                                <field name="term_date" attrs="{'invisible':[('term_type','!=','until')]}"/>
+                                <field name="term_action"/>
+                            </group>
+                        </group>
+                        <div>
+                            <field name="is_late" invisible="1"/>
+                            <div attrs="{'invisible':[('is_late', '=', False)]}" style="padding: 1.75rem 2.25rem; color: #7d5a29; background-color: #fcefdc; border-color: #fbe8cd;" >
+                                <div class="row">
+                                    <div class="col-xs-1">
+                                        <span class="fa fa-3x fa-warning fa-lg"/>
+                                    </div>
+                                    <div class="col-xs-11">
+                                        <field name="warning_msg"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </sheet>
+                   <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sale_frame_contract" model="ir.actions.act_window">
+            <field name="name">Contratos marco</field>
+            <field name="res_model">partner.sale.frame.contract</field>
+            <field name="view_mode">kanban,tree,graph,pivot,form</field>
+            <field name="view_id" ref="view_sale_frame_contract_kanban"/>
+            <field name="search_view_id" ref="view_sale_frame_contract_search"/>
+            <field name="context">{'search_default_group_by_state':'1'}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Registre un nuevo contrato marco de ventas.
+              </p><p>
+                Defina sus contratos marco de ventas.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_action_frame_contract_sales" action="action_sale_frame_contract" parent="menu_contract_sales"
+                groups="alastor_partner_contract.group_sales_frame_contracts" sequence="1"/>
+
+	</data>
+</odoo>

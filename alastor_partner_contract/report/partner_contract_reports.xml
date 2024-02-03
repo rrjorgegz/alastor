@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>  
+        <report
+            id="sale_frame_contracts"
+            model="partner.sale.frame.contract"
+            string="Sale Frame Contracts"
+            report_type="qweb-pdf"
+            name="alastor_partner_contract.report_sale_frame_contracts"
+            file="alastor_partner_contract.report_sale_frame_contracts"
+            attachment="'CM_'+(object.name).replace('/','_')+'.pdf'"
+            print_report_name="'CM_'+(object.name).replace('/','_')"
+            groups="alastor_partner_contract.contract_sales_visor"
+        />      
+        <report
+            id="action_report_purchase_docs"
+            model="report.purchase.docs"
+            string="Purchase docs"
+            report_type="qweb-pdf"
+            name="alastor_partner_contract.report_purchase_docs"
+            file="alastor_partner_contract.report_purchase_docs"            
+        />
+        <report
+            id="action_report_aged_partner_balance"
+            model="res.partner"
+            string="Aged Partner Balance"
+            menu="False"
+            report_type="qweb-pdf"
+            name="account.report_agedpartnerbalance"
+            file="account.report_agedpartnerbalance"
+        />
+        <report
+            id="partner_contract_sale_docs"
+            model="report.sale.docs"
+            string="Sale docs"
+            report_type="qweb-pdf"
+            name="alastor_partner_contract.report_sale_docs"
+            file="alastor_partner_contract.report_sale_docs"
+            attachment="False"
+        />
+        <record id="paperformat_us_landscape" model="report.paperformat">
+            <field name="name">US Letter Landscape</field>
+            <field name="default" eval="True" />
+            <field name="format">Letter</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+        <!-- <record id="partner_contract_purchase_docs" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="paperformat_us_landscape"/>
+        </record>
+        <record id="partner_contract_sale_docs" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="paperformat_us_landscape"/>
+        </record> -->
+     </data>
+</odoo>

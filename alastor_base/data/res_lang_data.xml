@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+        <record id="base.lang_es" model="res.lang" >
+            <field name="thousands_sep">,</field>
+            <field name="decimal_point">.</field>
+        </record>
+    </data>
+</odoo>

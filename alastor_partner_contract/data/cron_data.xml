@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- CRON -->
+        <record id="ir_cron_mail_alerter_action" model="ir.cron">
+            <field name="name">Partner Contract Mail Alerter</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">work_days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">partner.contract.mail.alerter</field>
+            <field name="function">send_alert_mails</field>
+            <field name="priority">0</field>
+            <field name="args">(True,)</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="ir_cron_auto_closer_action" model="ir.cron">
+            <field name="name">Partner Contract Auto Closer</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">work_days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True"/>
+            <field name="model">partner.contract.auto.closer</field>
+            <field name="function">auto_close</field>
+            <field name="priority">0</field>
+            <field name="args">(True,)</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

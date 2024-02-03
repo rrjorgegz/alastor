@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- purchases -->
+        
+        <record id="seq_purchases_frame_contract_dir" model="ir.sequence">
+            <field name="name">Purchases Frame Contract</field>
+            <field name="code">partner.frame.contract.purchases</field>
+            <field name="prefix">CMC-%(year)s-</field>
+            <field name="padding">4</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+
+        
+        <record id="seq_purchases_contract_dir" model="ir.sequence">
+            <field name="name">Purchases Contract</field>
+            <field name="code">partner.contract.purchases</field>
+            <field name="prefix">CC-%(year)s-</field>
+            <field name="padding">4</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <record id="seq_purchases_supplement_dir" model="ir.sequence">
+            <field name="name">Purchases Supplement</field>
+            <field name="code">partner.supplement.purchases</field>
+            <field name="prefix">SC-%(year)s-</field>
+            <field name="padding">4</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+
+        <!-- sales -->
+        
+        <record id="seq_sales_frame_contract_dir" model="ir.sequence">
+            <field name="name">Sales Frame Contract</field>
+            <field name="code">partner.frame.contract.sales</field>
+            <field name="prefix">CMV-%(year)s-</field>
+            <field name="padding">4</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+
+        
+        <record id="seq_sales_contract_dir" model="ir.sequence">
+            <field name="name">Sales Contract</field>
+            <field name="code">partner.contract.sales</field>
+            <field name="prefix">CV-%(year)s-</field>
+            <field name="padding">4</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+
+        
+        <record id="seq_sales_supplement_dir" model="ir.sequence">
+            <field name="name">Sales Supplement</field>
+            <field name="code">partner.supplement.sales</field>
+            <field name="prefix">SV-%(year)s-</field>
+            <field name="padding">4</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>        
+    </data>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <!-- Mail Alert -->
+        <record id="view_mail_alert_form" model="ir.ui.view">
+            <field name="name">mail.alert.form</field>
+            <field name="model">partner.contract.mail.alert</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Nombre de la alerta..."/></h1>
+                        </div>
+                        <group>
+                             <field name="active"/>
+                             <field name="to" widget="many2many_tags"/>
+                             <field name="to_other"/>
+                             <field name="subject"/>
+                             <field name="body"/>
+                             <field name="always_send" />
+                             <field name="target_model" />
+                             <field name="target_filter" />
+                        </group>
+                        <button name="send" string="Probar" type="object" icon="fa-check"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_mail_alert_tree" model="ir.ui.view">
+            <field name="name">mail.alert.tree</field>
+            <field name="model">partner.contract.mail.alert</field>
+            <field name="arch" type="xml">
+                <tree>
+                      <field name="name"/>
+                      <field name="active"/>
+                      <field name="target_model" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_mail_alert" model="ir.actions.act_window">
+            <field name="name">Alertas por correo</field>
+            <field name="res_model">partner.contract.mail.alert</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Clic para crear una nueva alerta.
+              </p><p>
+                Defina sus alertas por correo.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_action_mail_alert" action="action_mail_alert"
+                parent="menu_contracts_configuration"
+                groups="alastor_partner_contract.contract_sales_manager,alastor_partner_contract.contract_purchases_manager"/>
+
+	</data>
+</odoo>

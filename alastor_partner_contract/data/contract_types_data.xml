@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Contract types-->
+        <record id="suministro_contract_type" model="partner.contract.type">
+            <field name="name">Suministro</field>
+            <field name="purchases" eval="True"/>
+            <field name="sales" eval="True"/>
+            <field name="active" eval="True"/>
+            <field name="code">100</field>
+        </record>
+
+        <record id="compraventa_contract_type" model="partner.contract.type">
+            <field name="name">Compraventa</field>
+            <field name="purchases" eval="True"/>
+            <field name="sales" eval="True"/>
+            <field name="active" eval="True"/>
+            <field name="code">105</field>
+        </record>
+
+        <record id="prestacion_contract_type" model="partner.contract.type">
+            <field name="name">Prestación de servicios</field>
+            <field name="purchases" eval="True"/>
+            <field name="sales" eval="True"/>
+            <field name="active" eval="True"/>
+            <field name="code">106</field>
+        </record>
+
+        <record id="comodato_contract_type" model="partner.contract.type">
+            <field name="name">Comodato</field>
+            <field name="purchases" eval="True"/>
+            <field name="sales" eval="True"/>
+            <field name="active" eval="True"/>
+            <field name="code">107</field>
+        </record>
+
+        <record id="arrendamiento_contract_type" model="partner.contract.type">
+            <field name="name">Arrendamiento</field>
+            <field name="purchases" eval="True"/>
+            <field name="sales" eval="True"/>
+            <field name="active" eval="True"/>
+            <field name="code">108</field>
+        </record>
+        <record id="ejecucion_obra_contract_type" model="partner.contract.type">
+            <field name="name">Ejecución de obra</field>
+            <field name="purchases" eval="True"/>
+            <field name="sales" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="code">109</field>
+        </record>
+        <record id="alquiler_contract_type" model="partner.contract.type">
+            <field name="name">Alquiler</field>
+            <field name="purchases" eval="True"/>
+            <field name="sales" eval="True"/>
+            <field name="active" eval="True"/>
+            <field name="code">110</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="report_client_file">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.internal_layout">
+                <style rel="stylesheet">
+                    .table-condensed2 > thead > tr > th,
+                    .table-condensed2 > tbody > tr > th,
+                    .table-condensed2 > tfoot > tr > th,
+                    .table-condensed2 > thead > tr > td,
+                    .table-condensed2 > tbody > tr > td,
+                    .table-condensed2 > tfoot > tr > td {
+                        padding: 2px;
+                    }
+                </style>
+                <script>
+                    window.print();
+                </script>
+                <div class="page" style="font-size:10px">
+                    <table class="table table-condensed2 table-bordered">
+                        <tr>
+                            <td class="text-center" colspan="6"><strong>FICHA DE CLIENTE</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><strong>Nombre de la entidad:</strong></td>
+                            <td colspan="3" width="25%"><strong>Fecha de Acreditación:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><span t-field="o.partner_id.name" /></td>
+                            <td><strong>Día:</strong> </td>
+                            <td><strong>Mes:</strong></td>
+                            <td><strong>Año:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><strong>Dirección:</strong> <span t-field="o.partner_id.street" /> <span t-field="o.partner_id.street2" /> <span t-field="o.partner_id.city" /> <span t-field="o.partner_id.state_id" /></td>
+                            <td colspan="3" class="text-center"><span t-field="o.partner_id.acc_res_date" /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Teléfono:</strong> <span t-field="o.partner_id.phone" /></td>
+                            <td colspan="2"><strong>Email:</strong> <span t-field="o.partner_id.email" /></td>
+                            <td colspan="3"><strong>Fax:</strong> <span t-field="o.partner_id.fax" /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Código Entidad:</strong></td>
+                            <td><strong>Organismo o Ministerio:</strong></td>
+                            <td><strong>Licencia Operación Divisas:</strong></td>
+                            <td colspan="3"><strong>NIT:</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span t-field="o.partner_id.code" /></td>
+                            <td> <span t-field="o.partner_id.ministry" /></td>
+                            <td><span t-field="o.partner_id.foreign_currency_license" /></td>
+                            <td colspan="3"><span t-field="o.partner_id.nit_code" /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cuenta Bancaria (Moneda):</strong></td>
+                            <td><strong>Sucursal:</strong></td>
+                            <td colspan="4"><strong>Dirección Sucursal:</strong></td>
+                        </tr>
+                        <tr t-foreach="o.partner_id.bank_ids" t-as="b">
+                            <td ><span t-field="b.acc_number"/> (<span t-field="b.account_currency_id.name"/>)</td>
+                            <td ><span t-field="b.bank_sucursal"/></td>
+                            <td colspan="4"><span t-field="b.bank_sucursal.street"/> <span t-field="b.bank_sucursal.street2"/> <span t-field="b.bank_sucursal.city"/> <span t-field="b.bank_sucursal.state"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><strong>Personas autorizadas a solicitar servicios y firmar facturas:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Nombre y Apellidos:</strong></td>
+                            <td ><strong>Cargo:</strong></td>
+                            <td ><strong>Firma:</strong></td>
+                            <td colspan="2"><strong>C. Identidad:</strong></td>
+                        </tr>
+                        <tr t-foreach="o.invoice_authorized_ids" t-as="c">
+                            <td colspan="2"><span t-field="c.name"/></td>
+                            <td ><span t-field="c.job"/></td>
+                            <td ></td>
+                            <td colspan="2"><span t-field="c.id_number"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><strong>Personas autorizadas a firmar conciliaciones:</strong></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><strong>Nombre y Apellidos:</strong></td>
+                            <td ><strong>Cargo:</strong></td>
+                            <td ><strong>Firma:</strong></td>
+                            <td colspan="2"><strong>C. Identidad:</strong></td>
+                        </tr>
+                        <tr t-foreach="o.reconciliation_authorized_ids" t-as="c">
+                            <td colspan="2"><span t-field="c.name"/></td>
+                            <td ><span t-field="c.job"/></td>
+                            <td ></td>
+                            <td colspan="2"><span t-field="c.id_number"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><strong>Representante de la entidad designado para firmar contrato:</strong></td>
+                            <td colspan="2"><strong>Cargo que ocupa:</strong></td>
+                        </tr>
+                         <tr>
+                            <td colspan="4"><span t-field="o.represent_name"/></td>
+                            <td colspan="2"><span t-field="o.represent_job"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><strong>El director de la entidad o su equivalente declara, apercibido de la responsabilidad en que
+                                incurre que, todos los datos aquí plasmados son ciertos y que cualquier variación en
+                            alguno de ellos deberá comunicarse de inmediato a <span t-field="o.partner_id.company_id.name"></span>, para evitar
+                            cualquier consecuencia que de ello pueda derivarse.</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><strong>Nombre y apellidos del director de la entidad o su equivalente:</strong></td>
+                            <td colspan="2"><strong>Cuño:</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><span t-field="o.director_name"/></td>
+                            <td rowspan="3" colspan="2"> </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Carné de identidad:</strong></td>
+                            <td colspan="3"><span t-field="o.director_id_number"/> </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Firma:</strong></td>
+                            <td colspan="3"> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><strong>Documentos que deben acompañar a este modelo para conformar el expediente del cliente:</strong>
+                            <ol class="list-unstyled">
+                                <li>1. Resolución o Escritura de Constitución de la entidad.</li>
+                                <li>2. Escritura contentiva del objeto social.</li>
+                                <li>3. Licencia del banco Central de Cuba para operar en divisas.</li>
+                                <li>4. Certificado Comercial en CUC.</li>
+                                <li>5. Autorización Comercial para operar en MN.</li>
+                                <li>6. Resolución de Nombramiento del Director de la entidad.</li>
+                                <li>7. Resolución que faculta a la persona designada para firmar el Contrato.</li>
+                            </ol>
+                                <strong>Nota:</strong> Estos documentos para que posean fuera legal deben ser acompañados a través de fotocopias debidamente certificadas o por el correspondiente Certifico del Asesor Jurídico de la Entidad.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</odoo>

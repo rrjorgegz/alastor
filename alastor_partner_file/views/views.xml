@@ -1,0 +1,114 @@
+<odoo>
+    <data>
+        <!--Partner File-->
+        <record id="res_partner_file_search" model="ir.ui.view">
+            <field name="name">res.partner.file.tree</field>
+            <field name="model">res.partner.file</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="partner_id"></field>
+                    <field name="state"></field>
+                </search>
+            </field>
+        </record>
+        <record id="res_partner_file_tree" model="ir.ui.view">
+            <field name="name">res.partner.file.tree</field>
+            <field name="model">res.partner.file</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id"></field>
+                    <field name="initial_date"></field>
+                    <field name="final_date"></field>
+                    <field name="state"></field>
+                </tree>
+            </field>
+        </record>
+        <record id="res_partner_file_form" model="ir.ui.view">
+            <field name="name">res.partner.file.tree</field>
+            <field name="model">res.partner.file</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="case_activate" string="Activar" type="object"
+                                help="Activa la ficha de cliente" class="oe_highlight" states="draft" />
+
+                        <button name="case_cancel" string="Cancelar" type="object"
+                                help="Cancela la ficha de cliente" states="active"
+                                confirm="¿Realmente desea cancelar la ficha de cliente?"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,active,cancel" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="partner_id" attrs="{'readonly':[('state','!=','draft')]}"></field>
+                            <field name="initial_date" attrs="{'readonly':[('state','!=','draft')]}"></field>
+                            <field name="final_date" attrs="{'readonly':[('state','!=','active')]}"></field>
+                            <field name="director_name" attrs="{'readonly':[('state','!=','draft')]}"></field>
+                            <field name="director_id_number" attrs="{'readonly':[('state','!=','draft')]}"></field>
+                            <field name="represent_name" attrs="{'readonly':[('state','!=','draft')]}"></field>
+                            <field name="represent_id_number" attrs="{'readonly':[('state','!=','draft')]}"></field>
+                            <field name="represent_job" attrs="{'readonly':[('state','!=','draft')]}"></field>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Personas autorizadas a solicitar servicios y firmar facturas">
+                                <field colspan="4" name="invoice_authorized_ids" context="" attrs="{'readonly':[('state','!=','draft')]}">
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                        <field name="id_number"/>
+                                        <field name="job" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Personas autorizadas a firmar conciliaciones">
+                                <field colspan="4" name="reconciliation_authorized_ids" context="" attrs="{'readonly':[('state','!=','draft')]}">
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                        <field name="id_number"/>
+                                        <field name="job" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="res_partner_file_action" model="ir.actions.act_window">
+            <field name="name">Fichas de cliente</field>
+            <field name="res_model">res.partner.file</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="res_partner_file_tree"/>
+            <field name="search_view_id" ref="res_partner_file_search" />
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Clic para crear una nueva ficha de cliente.
+              </p><p>
+                Defina las fichas de sus clientes.
+              </p>
+            </field>
+        </record>
+
+        <!--Partner-->
+
+        <record id="res_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                        <button class="oe_inline oe_stat_button" type="action"
+                            attrs="{'invisible': [('is_company', '!=', True)]}"
+                            name="%(alastor_partner_file.res_partner_file_action)d"
+                            icon="fa-file"
+                            context="{'search_default_partner_id': active_id, 'search_default_state': 'active'}">
+                            <field string="Fichas de cliente" name="client_files_count" widget="statinfo"/>
+                        </button>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="before">
+                    <field name="foreign_currency_license" attrs="{'invisible': [('is_company','=', False)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

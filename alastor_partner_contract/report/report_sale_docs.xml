@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="report_sale_docs">
+<t t-call="report.html_container">
+    <t t-call="report.internal_layout">
+    <div class="page">
+        <div class="oe_structure"/>
+            <h2>Documentos Contractuales de Ventas</h2>
+            <br/>
+            <h3>Frame Contracts</h3>
+            <table class="table table-condensed mt32">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number</th>
+                        <th>Supplier</th>
+                        <th>Activation Date</th>
+                        <th>Expiration Date</th>
+                        <th>Company</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="get_frame_contracts(data['form']['frame_contract_ids'])" t-as="obj">
+                        <td><span t-field="obj.name"/></td>
+                        <td><span t-field="obj.number"/></td>
+                        <td><span t-field="obj.partner_id.name"/></td>
+                        <td><span t-field="obj.activation_date"/></td>
+                        <td><span t-field="obj.expiration_date"/></td>
+                        <td><span t-field="obj.company_id.name"/></td>
+                        <td><span t-if="obj.state=='draft'">Borrador</span>
+                            <span t-if="obj.state=='proform'">Proforma</span>
+                            <span t-if="obj.state=='approval'">Aprobado</span>
+                            <span t-if="obj.state=='active'">Activo</span>
+                            <span t-if="obj.state=='done'">Cerrado</span>
+                            <span t-if="obj.state=='cancel'">Cancelado</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <h3>Contracts</h3>
+            <table class="table table-condensed mt32">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number</th>
+                        <th>Supplier</th>
+                        <th>Activation Date</th>
+                        <th>Expiration Date</th>
+                        <th>Company</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="get_contracts(data['form']['contract_ids'])" t-as="obj">
+                        <td><span t-field="obj.name"/></td>
+                        <td><span t-field="obj.number"/></td>
+                        <td><span t-field="obj.partner_id.name"/></td>
+                        <td><span t-field="obj.activation_date"/></td>
+                        <td><span t-field="obj.expiration_date"/></td>
+                        <td><span t-field="obj.company_id.name"/></td>
+                        <td><span t-if="obj.state=='draft'">Borrador</span>
+                            <span t-if="obj.state=='proform'">Proforma</span>
+                            <span t-if="obj.state=='approval'">Aprobado</span>
+                            <span t-if="obj.state=='active'">Activo</span>
+                            <span t-if="obj.state=='done'">Cerrado</span>
+                            <span t-if="obj.state=='cancel'">Cancelado</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <h3>Supplements</h3>
+            <table class="table table-condensed mt32">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number</th>
+                        <th>Supplier</th>
+                        <th>Activation Date</th>
+                        <th>Expiration Date</th>
+                        <th>Company</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="get_supplements(data['form']['supplement_ids'])" t-as="obj">
+                        <td><span t-field="obj.name"/></td>
+                        <td><span t-field="obj.number"/></td>
+                        <td><span t-field="obj.partner_id.name"/></td>
+                        <td><span t-field="obj.activation_date"/></td>
+                        <td><span t-field="obj.expiration_date"/></td>
+                        <td><span t-field="obj.company_id.name"/></td>
+                        <td><span t-if="obj.state=='draft'">Borrador</span>
+                            <span t-if="obj.state=='proform'">Proforma</span>
+                            <span t-if="obj.state=='approval'">Aprobado</span>
+                            <span t-if="obj.state=='active'">Activo</span>
+                            <span t-if="obj.state=='done'">Cerrado</span>
+                            <span t-if="obj.state=='cancel'">Cancelado</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</t>
+</template>
+</data>
+</odoo>

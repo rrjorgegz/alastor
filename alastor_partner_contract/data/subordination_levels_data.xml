@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> <!-- must be 1 -->
+        <record id="sl_nac" model="partner.subordination.level">
+            <field name="name">Nacional</field>
+        </record>
+        <record id="sl_prov" model="partner.subordination.level">
+            <field name="name">Provincial</field>
+        </record>
+        <record id="sl_mun" model="partner.subordination.level">
+            <field name="name">Municipal</field>
+        </record>
+        <record id="sl_loc" model="partner.subordination.level">
+            <field name="name">Local</field>
+        </record>
+    </data>
+</odoo>

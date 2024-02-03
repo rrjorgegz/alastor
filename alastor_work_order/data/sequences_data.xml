@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- purchases -->
+        
+        <record id="seq_work_order_dir" model="ir.sequence">
+            <field name="name">work Order</field>
+            <field name="code">wor.ord</field>
+            <field name="prefix">OT-%(year)s-</field>
+            <field name="padding">4</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- Partner -->
+        <record id="view_partner_form_inherith" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.1</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="/form/sheet/div/field[@name='ministry']" position="after">
+                    <field name="subordination_level_id" placeholder="Nivel de subordinación" attrs="{'invisible': [('is_company','=',False)]}"/>
+                </xpath> -->
+
+                
+            </field>
+        </record>    
+
+        
+	</data>
+</odoo>

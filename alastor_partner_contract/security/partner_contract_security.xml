@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		
+		<record model="ir.module.category" id="module_category_contract_sale_management">
+			<field name="name">Sales contracts</field>
+			<field name="sequence">70</field>
+		</record>
+		
+		<record model="ir.module.category" id="module_category_contract_purchase_management">
+			<field name="name">Purchases contracts</field>
+			<field name="sequence">75</field>
+		</record>
+	
+		<!-- Roles Definition -->
+        <record model="res.groups" id="contract_sales_visor">
+			<field name="name">Visor</field>
+			<field name="category_id" ref="module_category_contract_sale_management"/>
+		</record>
+		<record model="res.groups" id="contract_sales_specialist">
+			<field name="name">User</field>
+			<field name="category_id" ref="module_category_contract_sale_management"/>
+            <field name="implied_ids" eval="[(4, ref('contract_sales_visor'))]"/>
+		</record>
+        <record model="res.groups" id="contract_sales_manager">
+			<field name="name">Manager</field>
+			<field name="category_id" ref="module_category_contract_sale_management"/>
+			<field name="implied_ids" eval="[(4, ref('contract_sales_specialist'))]" />
+		</record>
+
+        <!-- Roles Definition Purchase-->
+        <record model="res.groups" id="contract_purchases_visor">
+			<field name="name">Visor</field>
+			<field name="category_id" ref="module_category_contract_purchase_management"/>
+		</record>
+		<record model="res.groups" id="contract_purchases_specialist">
+			<field name="name">User</field>
+			<field name="category_id" ref="module_category_contract_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('contract_purchases_visor'))]"/>
+		</record>
+        <record model="res.groups" id="contract_purchases_manager">
+			<field name="name">Manager</field>
+			<field name="category_id" ref="module_category_contract_purchase_management"/>
+			<field name="implied_ids" eval="[(4, ref('contract_purchases_specialist'))]" />
+		</record>
+
+        
+
+
+		
+		<record id="group_sales_frame_contracts" model="res.groups">
+			<field name="name">Show sales frame contracts menu</field>
+			<field name="category_id" ref="base.module_category_hidden"/>
+    	</record>
+		<record id="group_sales_contracts" model="res.groups">
+			<field name="name">Show sales contracts menu</field>
+			<field name="category_id" ref="base.module_category_hidden"/>
+    	</record>
+		<record id="group_sales_supplements" model="res.groups">
+			<field name="name">Show sales supplements menu</field>
+			<field name="category_id" ref="base.module_category_hidden"/>
+    	</record>
+		<record id="group_purchases_frame_contracts" model="res.groups">
+			<field name="name">Show purchases frame contracts menu</field>
+			<field name="category_id" ref="base.module_category_hidden"/>
+    	</record>
+		<record id="group_purchases_contracts" model="res.groups">
+			<field name="name">Show purchases contracts menu</field>
+			<field name="category_id" ref="base.module_category_hidden"/>
+    	</record>
+		<record id="group_purchases_supplements" model="res.groups">
+			<field name="name">Show purchases supplements menu</field>
+			<field name="category_id" ref="base.module_category_hidden"/>
+    	</record>
+
+		<record id="base.user_root" model="res.users">
+            <field name="groups_id" eval="[(4, ref('alastor_partner_contract.contract_sales_manager')), (4, ref('alastor_partner_contract.contract_purchases_manager'))]"/>
+        </record>
+
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('alastor_partner_contract.contract_sales_manager')), (4, ref('alastor_partner_contract.contract_purchases_manager'))]"/>
+        </record>
+	</data>
+</odoo>

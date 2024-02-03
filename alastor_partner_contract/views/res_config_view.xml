@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>  
+    <record id="view_contracts_resources_configuration" model="ir.ui.view">
+            <field name="name">Contracts settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="model">res.config.settings</field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Contratación" string="Contratación" data-key="alastor_partner_contract" groups="alastor_partner_contract.contract_sales_manager,alastor_partner_contract.contract_purchases_manager">
+                
+                        <h2>Contratos de compras</h2>
+                        <div class="row mt16 o_settings_container" id="purchases_contracts_settings">
+                            <div class="col-12 col-lg-6 o_setting_box" id="purchase_frame_contracts">
+                                <div class="o_setting_left_pane">
+                                    <field name="group_purchases_frame_contracts" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="group_purchases_frame_contracts"/>
+                                    <div class="text-muted">
+                                        Mostrar contratos marco de compras
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="purchase_contracts">
+                                <div class="o_setting_left_pane">
+                                    <field name="group_purchases_contracts" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="group_purchases_contracts"/>
+                                    <div class="text-muted">
+                                        Mostrar contratos de compras
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="purchase_supplements">
+                                <div class="o_setting_left_pane">
+                                    <field name="group_purchases_supplements" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="group_purchases_supplements"/>
+                                    <div class="text-muted">
+                                        Mostrar suplementos de compras
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>Contratos de ventas</h2>
+                        <div class="row mt16 o_settings_container" id="sales_contracts_settings">
+                            <div class="col-12 col-lg-6 o_setting_box" id="sales_frame_contracts">
+                                <div class="o_setting_left_pane">
+                                    <field name="group_sales_frame_contracts" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="group_sales_frame_contracts"/>
+                                    <div class="text-muted">
+                                        Mostrar contratos marco de ventas
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="sale_contracts">
+                                <div class="o_setting_left_pane">
+                                    <field name="group_sales_contracts" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="group_sales_contracts"/>
+                                    <div class="text-muted">
+                                        Mostrar contratos de ventas
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="sale_supplements">
+                                <div class="o_setting_left_pane">
+                                    <field name="group_sales_supplements" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="group_sales_supplements"/>
+                                    <div class="text-muted">
+                                        Mostrar suplementos de ventas
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="action_alastor_partner_contract_config" model="ir.actions.act_window">
+            <field name="name">Ajustes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'alastor_partner_contract'}</field>
+    </record>
+
+    <menuitem id="menu_alastor_partner_contract_config" name="Ajustes" parent="menu_contracts_configuration"
+        sequence="0" action="action_alastor_partner_contract_config" groups="base.group_system"/>
+</odoo>

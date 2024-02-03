@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+
+        <!--Partner-->
+        <record model="ir.ui.view" id="view_res_partner_graph">
+            <field name="name">res.partner.graph</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <graph string="Partner" type="pivot">
+                    <field name="name" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="df_res_partner_list" model="ir.ui.view">
+            <field name="name">df.res.partner.list</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='display_name']" position="after">
+                    <field name="reeup_code"/>
+                    <field name="nit_code"/>
+                    <field name="short_description"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="df_res_partner_form" model="ir.ui.view">
+            <field name="name">df.res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/group/group/field[@name='website']" position="after">
+                    <field name="code" attrs="{'invisible': [('is_company','=', False)]}" placeholder="e.g. 11680"/>
+                    <field name="reeup_code" placeholder="e.g. 103.0.11680" attrs="{'invisible': [('is_company','=', False)]}"/>
+                    <field name="nit_code" placeholder="e.g. 01001007102" attrs="{'invisible': [('is_company','=', False)]}"/>
+                    <field name="nae_code" attrs="{'invisible': [('is_company','=', False)]}"/>
+                </xpath>
+                <!--<xpath expr="/form/sheet/group/group/field[@name='phone']" position="before">
+                    <field name="archive_nro" attrs="{'invisible': [('is_company','=', False)]}"/>
+                </xpath>
+                 <xpath expr="/form/sheet/div/field[@name='category_id']" position="before">
+                    <field name="short_description" attrs="{'invisible': [('is_company','=', False)]}" placeholder="Nombre Corto: e.g. PCC"/>
+                    <field name="ministry" attrs="{'invisible': [('is_company','=', False)]}" placeholder="Ministerio al que pertenece"/>
+                </xpath> -->
+                <xpath expr="/form/sheet/notebook/page/field/form/sheet/group" position="inside">
+                    <field name="authorized"/>
+                    <field name="authorized_by" attrs="{'invisible': [('authorized','=',False)], 'required': [('authorized','=',True)]}"/>
+                    <field name="approve_charge" attrs="{'invisible': [('authorized','=',False)], 'required': [('authorized','=',True)]}"/>
+                    <field name="approve_res_no" attrs="{'invisible': [('authorized','=',False)], 'required': [('authorized','=',True)]}"/>
+                    <field name="approve_res_date" attrs="{'invisible': [('authorized','=',False)], 'required': [('authorized','=',True)]}"/>
+                </xpath>
+                <!-- <xpath expr="/form/sheet/group/group/div/div[@class='address_format']/field[@name='city']"
+                       position="replace">
+                    <field name="city" placeholder="Municipality" style="width: 40%%" options='{"no_open": True}'
+                           attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                </xpath> -->
+            </field>
+        </record>
+
+    </data>
+</odoo>

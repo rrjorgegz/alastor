@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+        <record id="base.main_company" model="res.company">
+            <field name="name">ALASTOR VC</field>            
+            <field name="currency_id" ref="base.CUP"/>
+            <field name="add_currency_id" ref="CUC"/>
+        </record>      
+    </data>
+</odoo>

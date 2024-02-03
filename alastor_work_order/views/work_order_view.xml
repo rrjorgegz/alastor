@@ -1,0 +1,185 @@
+<odoo>
+    <data>
+        <!-- Ordenes de Trabajo -->
+        <record model="ir.ui.view" id="work_order_form_view">
+            <field name="name">work.order.form</field>
+            <field name="model">work.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_abierto" type="object" string="Abierto" states="cerrado" confirm="Estás seguro de abrir esta orden de trabajo"/>
+                        <button name="action_cerrado" type="object" string="Cerrado" states="abierto" confirm="Estás seguro de cerrar esta orden de trabajo"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group name="left">
+                                <field name="name"/>
+                                <field name="number"/>
+                                <field name="bill_number"/>
+                                <field name="ref_contract_id"/>
+                                <field name="client_name"/>                            
+                            </group>
+                            <group name="right">
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+
+                            </group>
+                            
+                        </group>
+                        
+                        <notebook colspan="5">
+                            <page string="Descripción">
+                                <field name="description"/>
+                            </page>
+                            <page string="Centros de costo">
+                                <field name="cost_center_ids">
+                                    <tree string="Actividades">
+                                        <field name="name"/>
+                                        <field name="number"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Actividades">
+                                <field name="work_activity_ids">
+                                    <tree string="Actividades">
+                                        <field name="name"/>
+                                        <field name="number"/>
+                                        <field name="real_time"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="work_order_tree_view">
+            <field name="name">work.order.tree</field>
+            <field name="model">work.order</field>
+            <field name="arch" type="xml">
+                <tree string="Planes Tree">
+                    <field name="number"/>
+                    <field name="bill_number"/>
+                    <field name="client_name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="work_order_search_view">
+            <field name="name">work.order.search</field>
+            <field name="model">work.order</field>
+            <field name="arch" type="xml">
+                <search string="Buscar ordenes de trabajo">
+                    <field name="number"/>
+                    <field name="bill_number"/>
+                    <field name="client_name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                </search>
+            </field>
+        </record>
+
+        <!--Actividades-->
+        <record model="ir.ui.view" id="work_activity_form_view">
+            <field name='name'>work.activity.form</field>
+            <field name="model">work.activity</field>
+            <field name="arch" type="xml">
+                <form string="Actividades form">
+                    <sheet>
+                        <group colspan="3" col="1">
+                            <group name="left" string="">
+                                <field name="name"/>
+                                <field name="number"/>
+                                <field name="real_time"/>
+
+                            </group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="work_activity_tree_view">
+            <field name="name">work.activity.tree</field>
+            <field name="model">work.activity</field>
+            <field name="arch" type="xml">
+                <tree string="Lista de Actividades">
+                    <field name="name"/>
+                    <field name="number"/>
+                    <field name="real_time"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Centro de costo-->
+        <record model="ir.ui.view" id="center_cost_form_view">
+            <field name='name'>center.cost.form</field>
+            <field name="model">center.cost</field>
+            <field name="arch" type="xml">
+                <form string="Centro de costo form">
+                    <sheet>
+                        <group colspan="3" col="1">
+                            <group name="left" string="">
+                                <field name="name"/>
+                                <field name="number"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="center_cost_tree_view">
+            <field name="name">center.cost.tree</field>
+            <field name="model">center.cost</field>
+            <field name="arch" type="xml">
+                <tree string="Lista de centro de costos">
+                <field name="number"/>
+                <field name="name"/>                                
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="center_cost_search_view">
+            <field name="name">center.cost.search</field>
+            <field name="model">center.cost</field>
+            <field name="arch" type="xml">
+                <search string="Buscar centros de costos">
+                    <field name="number"/>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Orden de trabajo -->
+        <record model="ir.actions.act_window" id="work_order_list_action">
+            <field name="name">Ordenes de trabajo</field>
+            <field name="res_model">work.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea la primera orden de trabajo</p>
+            </field>
+        </record>
+
+        <!--Actividades-->
+        <record model="ir.actions.act_window" id="work_activity_list_action">
+            <field name="name">Actividades</field>
+            <field name="res_model">work.activity</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Centro de Costo-->
+        <record model="ir.actions.act_window" id="center_cost_list_action">
+            <field name="name">Centros de Costos</field>
+            <field name="res_model">center.cost</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Ordenes de trabajo -->
+        <menuitem id="menu_work_order" name="Ordenes de trabajo"
+            parent="menu_work_order_root" action="work_order_list_action" sequence="1" />
+    </data>
+</odoo>

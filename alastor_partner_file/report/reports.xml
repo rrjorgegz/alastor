@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="partner_file"
+            model="res.partner.file"
+            string="Ficha de Cliente"
+            report_type="qweb-pdf"
+            name="partner_file.report_client_file"
+            file="ficha_cliente"
+            attachment="False"
+        />
+        <report
+            id="partner_file_proform"
+            model="res.partner"
+            string="Proforma de Ficha de Cliente"
+            report_type="qweb-pdf"
+            name="partner_file.report_client_file_proform"
+            file="proforma_ficha_cliente"
+            attachment="False"
+        />
+     </data>
+</odoo>

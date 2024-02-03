@@ -1,0 +1,219 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alastor_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20200425\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-16 10:08+0000\n"
+"PO-Revision-Date: 2020-11-16 10:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_company__add_currency_id
+msgid "Add Currency"
+msgstr "Moneda Secundaria"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__approve_charge
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__approve_charge
+msgid "Approve charge"
+msgstr ""
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__archive_nro
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__archive_nro
+msgid "Archive"
+msgstr "Archivar"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__authorized_by
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__authorized_by
+msgid "Authorized by"
+msgstr "Autorizado por"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__authorized
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__authorized
+msgid "Authorized to firm contract"
+msgstr "Autorizado a firmar contratos"
+
+#. module: alastor_base
+#: model:ir.model.fields,help:alastor_base.field_res_partner__is_company
+#: model:ir.model.fields,help:alastor_base.field_res_users__is_company
+msgid "Check if the contact is a company, otherwise it is a person"
+msgstr ""
+"Marque esta casilla si el contacto es una compañía. En caso contrario, es "
+"una persona."
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__code
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__code
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__code
+msgid "Code"
+msgstr "Código"
+
+#. module: alastor_base
+#: model:ir.model,name:alastor_base.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: alastor_base
+#: model:ir.model,name:alastor_base.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__country_id
+msgid "Country"
+msgstr "País"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__acc_res_emitted
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__acc_res_emitted
+msgid "Emitted by"
+msgstr "Emitido por"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__id
+msgid "ID"
+msgstr ""
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__is_company
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__is_company
+msgid "Is a Company"
+msgstr "Es una compañia"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__ministry
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__ministry
+msgid "Ministry"
+msgstr "Ministerio"
+
+#. module: alastor_base
+#: model:ir.model,name:alastor_base.model_res_country_municipality
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__city
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__city
+msgid "Municipality"
+msgstr "Municipio"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__nae_code
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__nae_code
+msgid "NAE code"
+msgstr "Código NAE"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__nit_code
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__nit_code
+msgid "NIT code"
+msgstr "Código NIT"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: alastor_base
+#: model_terms:ir.ui.view,arch_db:alastor_base.view_res_partner_graph
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__reeup_code
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__reeup_code
+msgid "REEUP code"
+msgstr "Código REEUP"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__acc_res_no
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__acc_res_no
+msgid "Res No"
+msgstr "Resolución No."
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__approve_res_no
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__approve_res_no
+msgid "Res No."
+msgstr "Resolución No."
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__acc_res_date
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__approve_res_date
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__acc_res_date
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__approve_res_date
+msgid "Res date"
+msgstr "Resolución Fecha"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_partner__short_description
+#: model:ir.model.fields,field_description:alastor_base.field_res_users__short_description
+msgid "Short Description"
+msgstr "Descripción corta"
+
+#. module: alastor_base
+#: model:ir.model.fields,field_description:alastor_base.field_res_country_municipality__state_id
+msgid "State"
+msgstr "Estado"
+
+#. module: alastor_base
+#: model:ir.model.constraint,message:alastor_base.constraint_res_country_municipality_code
+msgid "The code must be unique!."
+msgstr "El código debe ser único!"
+
+#. module: alastor_base
+#: model:ir.model.fields,help:alastor_base.field_res_country_municipality__code
+msgid "The municipality code in three chars"
+msgstr "El código del municipio en tres letras"
+
+#. module: alastor_base
+#: model_terms:ir.ui.view,arch_db:alastor_base.df_res_partner_form
+msgid "e.g. 01001007102"
+msgstr "p.e. 01001007102"
+
+#. module: alastor_base
+#: model_terms:ir.ui.view,arch_db:alastor_base.df_res_partner_form
+msgid "e.g. 103.0.11680"
+msgstr "p.e. 103.0.11680"
+
+#. module: alastor_base
+#: model_terms:ir.ui.view,arch_db:alastor_base.df_res_partner_form
+msgid "e.g. 11680"
+msgstr "p.e. 11680"

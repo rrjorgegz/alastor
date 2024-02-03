@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <menuitem id='menu_work_order_root' name='Ordenes de trabajo' sequence="21" web_icon="alastor_work_order,static/description/icon.png"
+                groups="alastor_partner_contract.contract_sales_visor,alastor_partner_contract.contract_purchases_visor,alastor_work_order.work_order_specialist"/>
+
+	</data>
+</odoo>
