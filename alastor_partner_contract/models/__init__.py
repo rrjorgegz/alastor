@@ -12,4 +12,5 @@ from . import (
     sale_contracts,
     sale_frame_contracts,
     sale_supplements,
+    supplier_type
 )

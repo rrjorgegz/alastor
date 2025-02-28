@@ -68,6 +68,7 @@ class Partner(models.Model):
 
     ci = fields.Char("No. Identidad", size=11)
     subordination_level_id = fields.Many2one("partner.subordination.level", string="Subordination Level")
+    is_supplier_logistics = fields.Boolean("Es Proveedor de Logistica")
     """
     frame_contract_sale_ids = fields.One2many('partner.sale.frame.contract', 'partner_id',
                                               'Sales Frame Contracts')

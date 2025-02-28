@@ -18,6 +18,11 @@
                     action="base.action_partner_supplier_form"
                     sequence="2"/>
 
+                <menuitem id="menu_supplier_logistics" name="Proveedores Logistica"
+                    parent="menu_partners"
+                    action="action_supplier_logistics_form"
+                    sequence="3"/>
+
             <menuitem name="Logística"
                 id="menu_contract_purchases"
                 parent="menu_contracts_root"

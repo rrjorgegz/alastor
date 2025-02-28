@@ -214,6 +214,7 @@ class PurchaseContract(models.Model):
     description = fields.Text("Notas")
     parent_id = fields.Many2one("partner.purchase.frame.contract", "Contrato padre", readonly=True, states={"received": [("readonly", False)], "scheduled": [("readonly", False)]})
     contract_type_id = fields.Many2one("partner.contract.type", "Tipo de contrato", readonly=True, states={"received": [("readonly", False)], "scheduled": [("readonly", False)]})
+    supplier_type_id = fields.Many2one('supplier.type', "Tipo de Proveedor")
     supplement_ids = fields.One2many("partner.purchase.supplement", "parent_id", "Suplementos")
     supplement_count = fields.Integer(compute=_get_supplement_count, string="Número de suplementos")
     validity_date_progress = fields.Float(compute=_expiration_date_progress, string="Progreso")

@@ -166,7 +166,7 @@
                             name="%(action_sale_supplement_all)d"
                             icon="fa-paperclip"
                             groups="alastor_partner_contract.contract_sales_visor"
-                            context="{'search_default_frame_parent_id': active_id}" >
+                            context="{'search_default_parent_id': active_id}">
                                 <field string="Suplementos" name="supplement_count" widget="statinfo"/>
                             </button>
                         </div>

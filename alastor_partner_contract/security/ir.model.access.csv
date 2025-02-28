@@ -43,5 +43,6 @@ id_contract_sales_manager_am,name_alert_mail_sales_manager,model_partner_contrac
 access_partner_contract_mail_alerter,access_partner_contract_mail_alerter,model_partner_contract_mail_alerter,base.group_user,1,0,0,0
 access_partner_contract_auto_closer,access_partner_contract_auto_closer,model_partner_contract_auto_closer,base.group_user,1,0,0,0
 
+access_supplier_type,access_supplier_type,model_supplier_type,base.group_user,1,0,0,0
 
 
