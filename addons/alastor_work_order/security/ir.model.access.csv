@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+work_order_specialist_0,Work Order Specialist,model_work_order,alastor_work_order.work_order_specialist,1,1,1,1
+work_order_specialist_1,Work Order Specialist,model_work_activity,alastor_work_order.work_order_specialist,1,1,1,1
+work_order_specialist_2,Work Order Specialist,model_center_cost,alastor_work_order.work_order_specialist,1,1,1,1

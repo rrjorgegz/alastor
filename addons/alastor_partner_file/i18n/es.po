@@ -1,0 +1,546 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alastor_partner_file
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20200425\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-11 17:08+0000\n"
+"PO-Revision-Date: 2020-12-11 17:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid ""
+", para evitar\n"
+"                            cualquier consecuencia que de ello pueda derivarse."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "1. Resolución o Escritura de Constitución de la entidad."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "2. Escritura contentiva del objeto social."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "3. Licencia del banco Central de Cuba para operar en divisas."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "4. Certificado Comercial en CUC."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "5. Autorización Comercial para operar en MN."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "6. Resolución de Nombramiento del Director de la entidad."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid ""
+"7. Resolución que faculta a la persona designada para firmar el Contrato."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<span>&amp;nbsp;</span>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Año:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>C. Identidad:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Cargo que ocupa:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Cargo:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Carné de identidad:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+msgid "<strong>Cuenta Bancaria (Moneda):</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Cuenta Bancaria CUC/USD:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Cuenta Bancaria CUP:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Cuño:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Código Entidad:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Dirección Sucursal CUC/USD:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Dirección Sucursal CUP:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+msgid "<strong>Dirección Sucursal:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Dirección:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid ""
+"<strong>Documentos que deben acompañar a este modelo para conformar el "
+"expediente del cliente:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Día:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Email:</strong>"
+msgstr "<strong>Correo electrónico:</strong>"
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>FICHA DE CLIENTE</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Fax:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Fecha de Acreditación:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Firma:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Licencia Operación Divisas:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Mes:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>NIT:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Nombre de la entidad:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Nombre y Apellidos:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid ""
+"<strong>Nombre y apellidos del director de la entidad o su "
+"equivalente:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid ""
+"<strong>Nota:</strong> Estos documentos para que posean fuera legal deben "
+"ser acompañados a través de fotocopias debidamente certificadas o por el "
+"correspondiente Certifico del Asesor Jurídico de la Entidad."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Organismo o Ministerio:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Personas autorizadas a firmar conciliaciones:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid ""
+"<strong>Personas autorizadas a solicitar servicios y firmar "
+"facturas:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid ""
+"<strong>Representante de la entidad designado para firmar contrato:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Sucursal CUC/USD:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Sucursal CUP:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+msgid "<strong>Sucursal:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid "<strong>Teléfono:</strong>"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields.selection,name:alastor_partner_file.selection__res_partner_file__state__active
+msgid "Activa"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.res_partner_file_form
+msgid "Activa la ficha de cliente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.res_partner_file_form
+msgid "Activar"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields.selection,name:alastor_partner_file.selection__res_partner_file__state__draft
+msgid "Borrador"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__id_number
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__id_number
+msgid "CI"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__director_id_number
+msgid "CI del director o equivalente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__represent_id_number
+msgid "CI del representante para firmar contratos"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.res_partner_file_form
+msgid "Cancela la ficha de cliente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields.selection,name:alastor_partner_file.selection__res_partner_file__state__cancel
+msgid "Cancelada"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.res_partner_file_form
+msgid "Cancelar"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__job
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__job
+msgid "Cargo"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__represent_job
+msgid "Cargo del representante para firmar contratos"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.actions.act_window,help:alastor_partner_file.res_partner_file_action
+msgid "Clic para crear una nueva ficha de cliente."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__client_file_id
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__client_file_id
+msgid "Client File"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner__client_file_ids
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_users__client_file_ids
+msgid "Client Files"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__partner_id
+msgid "Cliente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model,name:alastor_partner_file.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__create_uid
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__create_uid
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__create_date
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__create_date
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: alastor_partner_file
+#: code:addons/alastor_partner_file/models/models.py:0
+#, python-format
+msgid "Debe proveer una fecha de fin antes de cancelar la ficha de cliente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: code:addons/alastor_partner_file/models/models.py:0
+#, python-format
+msgid "Debe proveer una fecha de inicio antes de activar la ficha de cliente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.actions.act_window,help:alastor_partner_file.res_partner_file_action
+msgid "Defina las fichas de sus clientes."
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__display_name
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__display_name
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.report_client_file_proform
+msgid ""
+"El director de la entidad o su equivalente declara, apercibido de la responsabilidad en que\n"
+"                                incurre que, todos los datos aquí plasmados son ciertos y que cualquier variación en\n"
+"                            alguno de ellos deberá comunicarse de inmediato a"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__state
+msgid "Estado"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__final_date
+msgid "Fecha de fin"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__initial_date
+msgid "Fecha de inicio"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.actions.report,name:alastor_partner_file.partner_file
+msgid "Ficha de Cliente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.actions.act_window,name:alastor_partner_file.res_partner_file_action
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner__client_files_count
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_users__client_files_count
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.res_partner_form
+msgid "Fichas de cliente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__id
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__id
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__id
+msgid "ID"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file____last_update
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice____last_update
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__write_uid
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__write_uid
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__write_date
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__write_date
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner__foreign_currency_license
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_users__foreign_currency_license
+msgid "Licencia para operar en divisas"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_invoice__name
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file_contact_reconciliation__name
+msgid "Nombre y apellidos"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__director_name
+msgid "Nombre y apellidos del director o equivalente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__represent_name
+msgid "Nombre y apellidos del representante para firmar contratos"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__reconciliation_authorized_ids
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.res_partner_file_form
+msgid "Personas autorizadas a firmar conciliaciones"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model.fields,field_description:alastor_partner_file.field_res_partner_file__invoice_authorized_ids
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.res_partner_file_form
+msgid "Personas autorizadas a solicitar servicios y firmar facturas"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.actions.report,name:alastor_partner_file.partner_file_proform
+msgid "Proforma de Ficha de Cliente"
+msgstr ""
+
+#. module: alastor_partner_file
+#: code:addons/alastor_partner_file/models/models.py:0
+#, python-format
+msgid "Solo se pueden eliminar las fichas de cliente en estado borrador"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model,name:alastor_partner_file.model_res_partner_file
+msgid "res.partner.file"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model,name:alastor_partner_file.model_res_partner_file_contact_invoice
+msgid "res.partner.file.contact.invoice"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model:ir.model,name:alastor_partner_file.model_res_partner_file_contact_reconciliation
+msgid "res.partner.file.contact.reconciliation"
+msgstr ""
+
+#. module: alastor_partner_file
+#: model_terms:ir.ui.view,arch_db:alastor_partner_file.res_partner_file_form
+msgid "¿Realmente desea cancelar la ficha de cliente?"
+msgstr ""
