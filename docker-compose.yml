@@ -7,6 +7,10 @@ services:
       - HOST=db
       - USER=odoo
       - PASSWORD=odoo
+    command:
+      - odoo
+      - -u
+      - alastor_base,alastor_partner_contract,alastor_partner_file,alastor_work_order
     depends_on:
       db:
         condition: service_healthy
