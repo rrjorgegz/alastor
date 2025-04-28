@@ -1,0 +1,79 @@
+version: "3.7"
+
+services:
+  web:
+    image: odoo:13.0
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo/sessions
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    networks:
+      - odoo-net
+    labels:
+      - com.centurylinklabs.watchtower.enable=true # Etiqueta para Watchtower
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - odoo-net
+    healthcheck: # Healthcheck para mejor manejo de dependencias
+      test: ["CMD-SHELL", "pg_isready -U odoo -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_PORT=5050
+    ports:
+      - "5050:5050"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - odoo-pgadmin4-data:/var/lib/pgadmin
+    networks:
+      - odoo-net
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=30 # Verificación cada 30 segundos
+      - WATCHTOWER_CLEANUP=true # Limpieza automática
+      - WATCHTOWER_LABEL_ENABLE=true # Habilitar actualización por etiquetas
+      # - WATCHTOWER_REPO_USER=rrjorgegz
+      # - WATCHTOWER_REPO_PASS=tu_token
+
+    command: --debug
+    networks:
+      - odoo-net
+
+networks:
+  odoo-net:
+    driver: bridge
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+  odoo-pgadmin4-data:
