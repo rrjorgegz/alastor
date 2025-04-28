@@ -5,7 +5,7 @@
     "website": "https://www.desoft.cu",
     "license": "LGPL-3",
     "category": "",
-    "depends": [],
+    "depends": ["alastor_partner_contract"],
     "summary": """
 
 Work Orders

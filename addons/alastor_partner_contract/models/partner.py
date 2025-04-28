@@ -91,7 +91,9 @@ class Partner(models.Model):
     subordination_level_id = fields.Many2one(
         "partner.subordination.level", string="Subordination Level"
     )
-    is_supplier_logistics = fields.Boolean("Es Proveedor de Logistica")
+    is_supplier_logistics = fields.Boolean(
+        "Es Proveedor de Logistica", default=False, required=True
+    )
     """
     frame_contract_sale_ids = fields.One2many('partner.sale.frame.contract',
     'partner_id','Sales Frame Contracts')
