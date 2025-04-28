@@ -7,6 +7,7 @@ services:
       - HOST=db
       - USER=odoo
       - PASSWORD=odoo
+    restart: unless-stopped
     command:
       - odoo
       - -u
@@ -30,6 +31,7 @@ services:
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
+    restart: unless-stopped
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     networks:
@@ -46,6 +48,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=admin
       - PGADMIN_LISTEN_PORT=5050
+    restart: unless-stopped
     ports:
       - "5050:5050"
     depends_on:
@@ -58,6 +61,7 @@ services:
 
   watchtower:
     image: containrrr/watchtower
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
