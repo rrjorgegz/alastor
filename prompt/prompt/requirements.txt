@@ -1,0 +1,8 @@
+debugpy
+pydevd-odoo
+pytest
+pylint-odoo
+pre-commit
+black
+flake8
+isort

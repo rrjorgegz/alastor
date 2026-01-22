@@ -1,0 +1,3 @@
+{
+  "extraPaths": ["/path/server/odoo", "/path/server/odoo/addons", "/path/custom_addons"]
+}

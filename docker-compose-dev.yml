@@ -1,47 +1,31 @@
-version: "3.7"
-
 services:
   web:
-    image: odoo:13.0
-    environment:
-      - HOST=db
-      - USER=odoo
-      - PASSWORD=odoo
-    command:
-      - odoo
-      - -u
-      - alastor_base,alastor_partner_contract,alastor_partner_file,alastor_work_order
+    container_name: ${ODOO_CONTAINER_NAME}
+    image: odoodev:${ODOO_VERSION}
+    # command: -u all --dev=xml,qweb,reload
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     ports:
-      - "8069:8069"
+      - "${ODOO_PORT}:8069"
+      - "${DEBUGPY_PORT}:${DEBUGPY_PORT}"
     volumes:
+      - ./config_dev:/etc/odoo
       - odoo-web-data:/var/lib/odoo
-      - ./config:/etc/odoo
-      - ./addons:/mnt/extra-addons
-    networks:
-      - odoo-net
-    labels:
-      - com.centurylinklabs.watchtower.enable=true # Etiqueta para Watchtower
-
+      - ${ODOO_SERVER}:/var/lib/odoo/odoo
+      - ${CUSTOM_ADDONS}:/var/lib/odoo/custom_addons
+    entrypoint: ${ENTRYPOINT}
   db:
-    image: postgres:12
+    container_name: ${PG_CONTAINER_NAME}
+    image: postgres:${PG_VERSION}
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=odoo
-      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_USER=${PG_USER}
       - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - ${PG_PORT}:5432
     volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
-    networks:
-      - odoo-net
-    healthcheck: # Healthcheck para mejor manejo de dependencias
-      test: ["CMD-SHELL", "pg_isready -U odoo -d postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
+      - pgdb-data:/var/lib/postgresql/data/pgdata
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -51,33 +35,11 @@ services:
     ports:
       - "5050:5050"
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     volumes:
       - odoo-pgadmin4-data:/var/lib/pgadmin
-    networks:
-      - odoo-net
-
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - WATCHTOWER_POLL_INTERVAL=30 # Verificación cada 30 segundos
-      - WATCHTOWER_CLEANUP=true # Limpieza automática
-      - WATCHTOWER_LABEL_ENABLE=true # Habilitar actualización por etiquetas
-      # - WATCHTOWER_REPO_USER=rrjorgegz
-      # - WATCHTOWER_REPO_PASS=tu_token
-
-    command: --debug
-    networks:
-      - odoo-net
-
-networks:
-  odoo-net:
-    driver: bridge
 
 volumes:
   odoo-web-data:
-  odoo-db-data:
+  pgdb-data:
   odoo-pgadmin4-data:
