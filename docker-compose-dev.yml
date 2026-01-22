@@ -2,6 +2,7 @@ services:
   web:
     container_name: ${ODOO_CONTAINER_NAME}
     image: odoodev:${ODOO_VERSION}
+    # image: rrjorgegz/alastor:13.0
     # command: -u all --dev=xml,qweb,reload
     depends_on:
       - db
@@ -12,7 +13,7 @@ services:
       - ./config_dev:/etc/odoo
       - odoo-web-data:/var/lib/odoo
       - ${ODOO_SERVER}:/var/lib/odoo/odoo
-      - ${CUSTOM_ADDONS}:/var/lib/odoo/custom_addons
+      - ${CUSTOM_ADDONS}:/mnt/extra-addons
     entrypoint: ${ENTRYPOINT}
   db:
     container_name: ${PG_CONTAINER_NAME}
