@@ -4,7 +4,7 @@
 
 - **Total de módulos:**
 - **Categorías:**
-- **Módulos Reserva:**
+- **Módulos Alastor:**
 
 ## Índice por Categoría
 

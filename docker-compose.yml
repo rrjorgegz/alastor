@@ -9,7 +9,6 @@ services:
       - PASSWORD=odoo
     restart: unless-stopped
     command:
-      - odoo
       - -u
       - alastor_base,alastor_partner_contract,alastor_partner_file,alastor_work_order
     depends_on:
