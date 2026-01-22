@@ -1,9 +1,9 @@
 services:
   web:
     container_name: ${ODOO_CONTAINER_NAME}
-    image: odoodev:${ODOO_VERSION}
-    # image: rrjorgegz/alastor:13.0
-    # command: -u all --dev=xml,qweb,reload
+    # image: odoodev:${ODOO_VERSION}
+    image: rrjorgegz/alastor:13.0
+    command: -u all --dev=xml,qweb,reload
     depends_on:
       - db
     ports:

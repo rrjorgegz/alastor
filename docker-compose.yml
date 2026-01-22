@@ -8,9 +8,7 @@ services:
       - USER=odoo
       - PASSWORD=odoo
     restart: unless-stopped
-    command:
-      - -u
-      - alastor_base,alastor_partner_contract,alastor_partner_file,alastor_work_order
+    command: -u all
     depends_on:
       db:
         condition: service_healthy
