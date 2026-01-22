@@ -1,4 +1,4 @@
-from odoo import SUPERUSER_ID, api, fields, models
+from odoo import fields, models
 
 
 class Company(models.Model):
@@ -9,21 +9,21 @@ class Company(models.Model):
     add_currency_id = fields.Many2one("res.currency", "Moneda adicional")
     partner_id = fields.Many2one("res.partner", "Entidad", required=False)
 
-    @api.model
-    def name_search(
-        self, name="", args=None, operator="ilike", limit=100, context=None
-    ):
-        if args is None:
-            args = []
-        if context is None:
-            args = {}
-        context = dict(context or {})
-        if context.pop("user_preference", None):
-            user = self.env["res.users"].search(SUPERUSER_ID)
-            cmp_ids = list(
-                set([user.company_id.id] + [cmp.id for cmp in user.company_ids])
-            )
-            args = (args or []) + [("id", "in", cmp_ids)]
-
-        ids = self.env["res.company"].search([("name", operator, name)] + args)
-        return ids.name_get()
+    # @api.model
+    # def name_search(
+    #     self, name="", args=None, operator="ilike", limit=100, context=None
+    # ):
+    #     if args is None:
+    #         args = []
+    #     if context is None:
+    #         context = {}
+    #     context = dict(context or {})
+    #     if context.pop("user_preference", None):
+    #         user = self.env["res.users"].search(SUPERUSER_ID)
+    #         cmp_ids = list(
+    #             set([user.company_id.id] + [cmp.id for cmp in user.company_ids])
+    #         )
+    #         args = (args or []) + [("id", "in", cmp_ids)]
+    #
+    #     ids = self.env["res.company"].search([("name", operator, name)] + args)
+    #     return ids.name_get()

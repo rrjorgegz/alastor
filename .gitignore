@@ -60,3 +60,6 @@ odoo/
 ### Environment ###
 .env
 .venv
+
+.vscode
+.idea
