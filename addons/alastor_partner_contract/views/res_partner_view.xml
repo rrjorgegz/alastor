@@ -31,7 +31,7 @@
             <field
         name="context"
       >{'res_partner_search_mode': 'supplier', 'default_is_company': True,
-        'default_is_supplier_logistics': True}</field>
+        'default_is_supplier_logistics': True, 'default_partner_role': 'logistics_supplier'}</field>
             <field name="filter" eval="True" />
             <field name="help" type="html">
                 <p
@@ -63,7 +63,7 @@
             <field name="domain">[('partner_role','in',['customer','both'])]</field>
             <field
         name="context"
-      >{'search_default_customer': 1,'res_partner_search_mode': 'customer', 'default_is_company': True, 'default_customer_rank': 1}</field>
+      >{'search_default_customer': 1,'res_partner_search_mode': 'customer', 'default_is_company': True, 'default_customer_rank': 1, 'default_partner_role': 'customer'}</field>
             <field name="help" type="html">
                 <p
           class="o_view_nocontent_smiling_face"
@@ -83,7 +83,7 @@
             <field name="domain">[('partner_role','in',['supplier','both'])]</field>
             <field
         name="context"
-      >{'search_default_supplier': 1,'res_partner_search_mode': 'supplier', 'default_is_company': True, 'default_supplier_rank': 1}</field>
+      >{'search_default_supplier': 1,'res_partner_search_mode': 'supplier', 'default_is_company': True, 'default_supplier_rank': 1, 'default_partner_role': 'supplier'}</field>
             <field name="help" type="html">
                 <p
           class="o_view_nocontent_smiling_face"

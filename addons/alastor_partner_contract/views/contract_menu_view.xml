@@ -61,7 +61,7 @@
       name="Informes"
       parent="menu_contracts_root"
       groups="alastor_partner_contract.contract_sales_visor"
-      sequence="5"
+      sequence="80"
     />
 
         <menuitem
@@ -69,7 +69,7 @@
       name="Configuración"
       parent="menu_contracts_root"
       groups="alastor_partner_contract.contract_sales_visor"
-      sequence="6"
+      sequence="99"
     />
 
         <menuitem

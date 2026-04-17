@@ -9,9 +9,9 @@ services:
     ports:
       - "8069:8069"
     volumes:
-      - "./config:/etc/odoo"
+      - "/home/odoo/alastor/config:/etc/odoo"
       - "odoo-web-data:/var/lib/odoo"
-      - "odoo-extra-addons:/mnt/extra-addons"
+      - "/home/odoo/alastor/addons:/mnt/extra-addons"
     healthcheck:
       test:
         - CMD
