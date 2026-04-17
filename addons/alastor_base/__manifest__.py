@@ -7,9 +7,6 @@
 Base Alastor
 ======================================================================
 
-
-
-
     """,
     "author": "ADATECS.surl",
     "website": "https://www.desoft.cu",
@@ -18,12 +15,14 @@ Base Alastor
     "depends": ["base", "base_setup", "web_editor", "web_unsplash"],
     "init_xml": [],
     "data": [
-        "views/res_partner_views.xml",
-        "security/ir.model.access.csv",
-        "data/states_municipalities_data.xml",
-        "data/res_lang_data.xml",
         "data/res_currency_data.xml",
         "data/res_company_data.xml",
+        "data/res_lang_data.xml",
+        "data/states_municipalities_data.xml",
+        "security/ir.model.access.csv",
+        "views/res_company_views.xml",
+        "views/res_country_municipality_views.xml",
+        "views/res_partner_views.xml",
     ],
     "test": [],
     "application": False,

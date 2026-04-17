@@ -31,9 +31,7 @@ TERM_TYPE = [
 ]
 
 
-class PurchaseSupplement(models.Model):
-    """Purchase Supplement"""
-
+class PartnerPurchaseSupplement(models.Model):
     _name = "partner.purchase.supplement"
     _description = "Purchase Supplement"
     _inherit = ["mail.thread", "mail.activity.mixin"]
@@ -511,7 +509,7 @@ ser hijos de un Contrato Marco y de un Contrato a la vez"""
             )
         if not parent_id and not frame_parent_id:
             raise exceptions.Warning(_("Los suplementos deben tener un padre"))
-        return super(PurchaseSupplement, self).create(vals)
+        return super(PartnerPurchaseSupplement, self).create(vals)
 
     def unlink(self):
         if self.state != "received":
@@ -519,7 +517,7 @@ ser hijos de un Contrato Marco y de un Contrato a la vez"""
                 _("No puede eliminar un suplemento sino está en estado Recibido.")
             )
 
-        return super(PurchaseSupplement, self).unlink()
+        return super(PartnerPurchaseSupplement, self).unlink()
 
     def extend(self):
         self.ensure_one()
@@ -555,7 +553,7 @@ ser hijos de un Contrato Marco y de un Contrato a la vez"""
 
     def write(self, vals):
         if self.state in ("active", "done", "cancel"):
-            return super(PurchaseSupplement, self).write(vals)
+            return super(PartnerPurchaseSupplement, self).write(vals)
 
         reception_date = vals.get(
             "reception_date", self.reception_date.strftime("%Y-%m-%d")
@@ -587,7 +585,7 @@ ser hijos de un Contrato Marco y de un Contrato a la vez"""
         if expiration_date is not None:
             vals["expiration_date"] = expiration_date
 
-        return super(PurchaseSupplement, self).write(vals)
+        return super(PartnerPurchaseSupplement, self).write(vals)
 
     def _validate_reception_date(self, reception_date):
         if reception_date > date.today().strftime("%Y-%m-%d"):
@@ -883,7 +881,7 @@ puede ser menor que la fecha de aprobación del padre"""
                 )
             return result
 
-        return super(PurchaseSupplement, self).name_get()
+        return super(PartnerPurchaseSupplement, self).name_get()
 
     @api.model
     def name_search(

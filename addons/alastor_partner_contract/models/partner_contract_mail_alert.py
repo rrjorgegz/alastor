@@ -1,9 +1,7 @@
-from datetime import datetime
-
 from odoo import _, api, exceptions, fields, models
 
 
-class MailAlert(models.Model):
+class PartnerContractMailAlert(models.Model):
     _name = "partner.contract.mail.alert"
     _description = "Contracts Mail Alert"
     _inherit = ["mail.thread"]
@@ -86,57 +84,3 @@ class MailAlert(models.Model):
         dicc.update({"subject": self.subject})
         dicc.update({"body_html": self.parse_body(docs)})
         self.env["mail.mail"].create(dicc)
-
-
-class MailAlerter(models.Model):
-    _name = "partner.contract.mail.alerter"
-    _description = "Contracts Mail Alerter"
-
-    def send_alert_mails(self):
-        alert_ids = self.env["partner.contract.mail.alert"].search(
-            [("active", "=", True)]
-        )
-        alerts = self.env["partner.contract.mail.alert"].browse(alert_ids)
-        for alert in alerts:
-            alert.send()
-
-        return True
-
-
-class AutoCloser(models.Model):
-    _name = "partner.contract.auto.closer"
-    _description = "Contracts Auto Closer"
-    _inherit = ["mail.thread"]
-
-    def auto_close(self):
-        classes = [
-            "partner.purchase.frame.contract",
-            "partner.purchase.contract",
-            "partner.purchase.supplement",
-            "partner.sale.frame.contract",
-            "partner.sale.contract",
-            "partner.sale.supplement",
-        ]
-        for model in classes:
-            today = datetime.today().strftime("%Y-%m-%d")
-            model_ids = self.env[model].search(
-                [
-                    ("state", "=", "active"),
-                    ("expiration_date", "<=", today),
-                    ("term_action", "=", "close"),
-                ]
-            )
-            self.env[model].write({"state": "done", "close_date": today})
-            if model_ids:
-                self.env[model].message_post(body=_("Closed by system"))
-
-            model_ids2 = self.env[model].search(
-                [
-                    ("state", "=", "active"),
-                    ("expiration_date", "<=", today),
-                    ("term_action", "=", "extend"),
-                ]
-            )
-            self.env[model].extend(model_ids2)
-
-        return True

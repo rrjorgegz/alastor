@@ -1,9 +1,7 @@
 from odoo import fields, models
 
 
-class ContractType(models.Model):
-    """Types of Contracts"""
-
+class PartnerContractType(models.Model):
     _name = "partner.contract.type"
     _description = "Tipo de contrato"
 

@@ -31,9 +31,7 @@ TERM_TYPE = [
 ]
 
 
-class PurchaseFrameContract(models.Model):
-    """Purchase Frame Contract"""
-
+class PartnerPurchaseFrameContract(models.Model):
     _name = "partner.purchase.frame.contract"
     _description = "Contrato marco de compras"
     _inherit = ["mail.thread", "mail.activity.mixin"]
@@ -78,7 +76,7 @@ class PurchaseFrameContract(models.Model):
                 if delta < -7:
                     i.is_late = True
                     i.warning_msg = """Este documento fue recibido hace %s días
-y aun no se ha planificado su aprobación.""" % str(
+                                    y aun no se ha planificado su aprobación.""" % str(
                         abs(delta)
                     )
             if i.state == "scheduled":
@@ -86,7 +84,7 @@ y aun no se ha planificado su aprobación.""" % str(
                 if delta < -2:
                     i.is_late = True
                     i.warning_msg = """Este documento estaba planificado para hace %s días y
-aun no se ha aprobado o rechazado.""" % str(
+                                    aun no se ha aprobado o rechazado.""" % str(
                         abs(delta)
                     )
             if i.state == "approved" or i.state == "resent":
@@ -94,7 +92,7 @@ aun no se ha aprobado o rechazado.""" % str(
                 if delta < -7:
                     i.is_late = True
                     i.warning_msg = """Este documento fue aprobado hace %s días y
-aun no se ha activado.""" % str(
+                                    aun no se ha activado.""" % str(
                         abs(delta)
                     )
             if i.state == "active" and i.expiration_date:
@@ -394,7 +392,7 @@ aun no se ha activado.""" % str(
             raise exceptions.Warning(
                 _("La fecha de recepción no puede ser mayor que hoy")
             )
-        return super(PurchaseFrameContract, self).create(vals)
+        return super(PartnerPurchaseFrameContract, self).create(vals)
 
     def unlink(self):
         if self.state != "received":
@@ -404,7 +402,7 @@ aun no se ha activado.""" % str(
                 )
             )
 
-        return super(PurchaseFrameContract, self).unlink()
+        return super(PartnerPurchaseFrameContract, self).unlink()
 
     def extend(self):
         self.ensure_one()
@@ -439,7 +437,7 @@ aun no se ha activado.""" % str(
 
     def write(self, vals):
         if self.state in ("active", "done", "rejected"):
-            return super(PurchaseFrameContract, self).write(vals)
+            return super(PartnerPurchaseFrameContract, self).write(vals)
         if vals.get(
             "reception_date", self.reception_date.strftime("%Y-%m-%d")
         ) > date.today().strftime("%Y-%m-%d"):
@@ -473,7 +471,7 @@ aun no se ha activado.""" % str(
                     expiration_date = activation_date + relativedelta(days=int(term))
                 vals.update({"expiration_date": expiration_date})
 
-        return super(PurchaseFrameContract, self).write(vals)
+        return super(PartnerPurchaseFrameContract, self).write(vals)
 
     def case_reset(self):
         self.ensure_one()
@@ -537,14 +535,14 @@ aun no se ha activado.""" % str(
                     raise exceptions.Warning(
                         _(
                             """Debe establecer la fecha
-de aprobación para aprobar el documento"""
+                            de aprobación para aprobar el documento"""
                         )
                     )
                 if it.approved_date < it.reception_date:
                     raise exceptions.Warning(
                         _(
                             """La fecha de aprobación no
-puede ser anterior a la fecha de recepción"""
+                            puede ser anterior a la fecha de recepción"""
                         )
                     )
                 if it.approved_date > fields.Date.today():
@@ -576,7 +574,7 @@ puede ser anterior a la fecha de recepción"""
                     raise exceptions.Warning(
                         _(
                             """Debe establecer la
-fecha de activación para activar el documento"""
+                            fecha de activación para activar el documento"""
                         )
                     )
                 if it.term_type == "until":
@@ -584,7 +582,7 @@ fecha de activación para activar el documento"""
                         raise exceptions.Warning(
                             _(
                                 """Debe establecer la
-fecha de término para activar el documento"""
+                                fecha de término para activar el documento"""
                             )
                         )
                 if it.term_type == "fixed":
@@ -596,14 +594,14 @@ fecha de término para activar el documento"""
                         raise exceptions.Warning(
                             _(
                                 """Debe establecer la unidad de
-medida del término para activar el documento"""
+                                medida del término para activar el documento"""
                             )
                         )
                 if it.activation_date < it.approved_date:
                     raise exceptions.Warning(
                         _(
                             """La fecha de activación no puede
-ser menor que la fecha de aprobación"""
+                            ser menor que la fecha de aprobación"""
                         )
                     )
                 if it.activation_date > fields.Date.today():
@@ -615,7 +613,7 @@ ser menor que la fecha de aprobación"""
                         raise exceptions.Warning(
                             _(
                                 """La fecha de expiración no
-puede ser menor que la fecha de activación"""
+                                puede ser menor que la fecha de activación"""
                             )
                         )
                 message = _("El contrato marco '%s' ha sido activado.") % it.name
@@ -689,7 +687,7 @@ puede ser menor que la fecha de activación"""
                 )
             return result
 
-        return super(PurchaseFrameContract, self).name_get()
+        return super(PartnerPurchaseFrameContract, self).name_get()
 
     @api.model
     def name_search(

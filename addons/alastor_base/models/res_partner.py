@@ -7,13 +7,23 @@ class ResPartner(models.Model):
 
     @api.onchange("city")
     def _onchange_municipality(self):
-        self.state_id = self.city.state_id
+        if self.city:
+            self.state_id = self.city.state_id
+        else:
+            self.state_id = False
 
     ministry = fields.Char("Ministry")
     reeup_code = fields.Char(string="REEUP code", index=True)
     nit_code = fields.Char(string="NIT code")
     nae_code = fields.Char("NAE code")
     city = fields.Many2one("res.country.municipality", string="Municipality")
+
+    @api.onchange("state_id")
+    def _onchange_state_id(self):
+        if self.state_id:
+            return {"domain": {"city": [("state_id", "=", self.state_id.id)]}}
+        return {"domain": {"city": []}}
+
     # Accreditation
     acc_res_no = fields.Char("Res No")
     acc_res_date = fields.Date("Res date")
@@ -53,9 +63,3 @@ class ResPartner(models.Model):
         elif self.commercial_company_name:
             address_format = "%(company_name)s\n" + address_format
         return address_format % args
-
-
-class ResCompany(models.Model):
-    _inherit = "res.company"
-
-    add_currency_id = fields.Many2one("res.currency", string="Add Currency")

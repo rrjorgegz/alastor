@@ -5,7 +5,7 @@
     "website": "https://www.desoft.cu",
     "license": "LGPL-3",
     "category": "Contracts",
-    "depends": ["alastor_base", "mail"],
+    "depends": ["alastor_base", "mail", "contacts"],
     "summary": """
 
 Partner contracts
@@ -25,7 +25,7 @@ Partner contracts
         "data/subordination_levels_data.xml",
         "report/report_purchase_docs.xml",
         "report/report_sale_docs.xml",
-        "views/partner_view.xml",
+        "views/res_partner_view.xml",
         "views/contract_menu_view.xml",
         "wizard/purchase_docs_view.xml",
         "wizard/sale_docs_view.xml",

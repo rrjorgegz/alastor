@@ -1,7 +1,7 @@
 from odoo import fields, models
 
 
-class AuthorizedSignature(models.Model):
+class Organism(models.Model):
     _name = "organism"
     _rec_name = "name"
 

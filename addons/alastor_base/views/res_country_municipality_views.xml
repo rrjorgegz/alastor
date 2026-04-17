@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- View res.country.municipality View Tree -->
+    <record id="view_res_country_municipality_tree" model="ir.ui.view">
+        <field name="name">view.res.country.municipality.tree</field>
+        <field name="model">res.country.municipality</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="code" />
+                <field name="state_id" />
+                <field name="country_id" />
+            </tree>
+        </field>
+    </record>
+    <!-- View res.country.municipality form -->
+    <record id="view_res_country_municipality_form" model="ir.ui.view">
+        <field name="name">view.res.country.municipality.form</field>
+        <field name="model">res.country.municipality</field>
+        <field name="arch" type="xml">
+            <form string="Res Country Municipality">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Name... " />
+                        </h1>
+                    </div>
+                    <group name="name" string="string">
+                        <group>
+                            <field name="code" />
+                        </group>
+                        <group>
+                            <field name="state_id" />
+                            <field name="country_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action res.country.municipality -->
+    <record id="action_res_country_municipality" model="ir.actions.act_window">
+        <field name="name">Res Country Municipality</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.country.municipality</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p
+        class="oe_view_nocontent_create"
+      >There is no examples click here to add new Res Country Municipality.</p>
+        </field>
+    </record>
+
+    <menuitem
+    id="menu_res_country_municipality"
+    name="Municipality"
+    action="action_res_country_municipality"
+    parent="base.menu_users"
+    sequence="50"
+  />
+</odoo>

@@ -5,12 +5,13 @@ from dateutil.relativedelta import relativedelta
 from odoo import _, api, exceptions, fields, models
 
 AVAILABLE_STATES = [
-    ("draft", "Borrador"),
-    ("proform", "Proforma"),
-    ("approved", "Aprobado"),
-    ("rejected", "Rechazado"),
-    ("active", "Activo"),
-    ("done", "Cerrado"),
+    ("received", "Recivido"),  # we receive a proforma (1 or 2 days)
+    ("scheduled", "Planificado"),  # the contract is ready to be aproved or not
+    ("approved", "Aprobado"),  # the contract is approved
+    ("rejected", "Rechazado"),  # the contract is not approved
+    ("resent", "Reenviado"),  # the contract is re sent to supplier to final signing
+    ("active", "Activo"),  # the contract has came back and is active
+    ("done", "Cerrado"),  # the contract is done
 ]
 
 TERM_UOM = [
@@ -30,14 +31,11 @@ TERM_TYPE = [
 ]
 
 
-class SaleContract(models.Model):
-    """Sale Contract"""
-
-    _name = "partner.sale.contract"
-    _rec_name = "client_ref"
-    _description = "Sale Contract"
+class PartnerPurchaseContract(models.Model):
+    _name = "partner.purchase.contract"
+    _description = "Contrato de compras"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _order = "emission_date desc, number desc"
+    _order = "reception_date desc, number desc"
 
     def _expiration_date_progress(self):
         today = fields.Date.today()
@@ -70,21 +68,29 @@ class SaleContract(models.Model):
         for i in self:
             i.is_late = False
             i.warning_msg = ""
-            if i.state == "proform":
-                delta = (i.emission_date - date.today()).days
-                if delta < -14:
+            if i.state == "received":
+                delta = (i.reception_date - date.today()).days
+                if delta < -7:
                     i.is_late = True
-                    i.warning_msg = """Este documento fue enviado
-hace %s días y aun no se ha obtenido respuesta.""" % str(
+                    i.warning_msg = """Este documento fue recibido hace %s días y aun
+                        no se ha planificado su aprobación.""" % str(
                         abs(delta)
                     )
-            if i.state == "approved":
+            if i.state == "scheduled":
+                delta = (i.scheduled_date - date.today()).days
+                if delta < -2:
+                    i.is_late = True
+                    i.warning_msg = """Este documento estaba planificado para hace %s días
+                        y aun no se ha aprobado o rechazado.""" % str(
+                        abs(delta)
+                    )
+            if i.state == "approved" or i.state == "resent":
                 delta = (i.approved_date - date.today()).days
                 if delta < -7:
                     i.is_late = True
-                    i.warning_msg = (
-                        "Este documento fue aprobado hace %s días y aun no se ha activado."
-                        % str(abs(delta))
+                    i.warning_msg = """Este documento fue aprobado hace %s días y
+                        aun no se ha activado.""" % str(
+                        abs(delta)
                     )
             if i.state == "active" and i.expiration_date:
                 delta = (i.expiration_date - date.today()).days
@@ -106,57 +112,29 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
         data = (
             self.name
             + ", "
-            + _("número: ")
+            + _("number: ")
             + self.number
-            + ", "
-            + _("cliente: ")
+            + " (Ref: "
+            + self.supplier_ref
+            + "), "
+            + _("supplier: ")
             + self.partner_id.name
         )
         if self.state == "active":
             if self.expiration_date:
-                delta = relativedelta(
-                    datetime.strptime(self.expiration_date, "%Y-%m-%d"),
-                    datetime.today(),
-                )
+                delta = (self.expiration_date - date.today()).days
                 if delta.days >= 0:
-                    data += (
-                        ", "
-                        + _("expira en ")
-                        + str(delta.days + (delta.months * 31) + (delta.years * 365))
-                        + _(" días")
-                    )
+                    data += ", " + _("expira en ") + str(delta) + _(" days")
                 else:
-                    data += (
-                        ", "
-                        + _("ha expirado hace ")
-                        + str(
-                            (delta.days + (delta.months * 31) + (delta.years * 365))
-                            * -1
-                        )
-                        + _(" días")
-                    )
+                    data += ", " + _("ha expirado hace ") + str(abs(delta)) + _(" days")
             else:
                 data += ", " + _("no expira")
-        if self.state == "proform":
-            delta = relativedelta(
-                datetime.today(), datetime.strptime(self.emission_date, "%Y-%m-%d")
-            )
-            data += (
-                ", "
-                + _("creado hace ")
-                + str(delta.days + (delta.months * 31) + (delta.years * 365))
-                + _(" días")
-            )
+        if self.state == "scheduled" or self.state == "received":
+            delta = (date.today() - self.reception_date).days
+            data += ", " + _("creado hace ") + str(delta) + _(" días")
         if self.state == "approved":
-            delta = relativedelta(
-                datetime.today(), datetime.strptime(self.approved_date, "%Y-%m-%d")
-            )
-            data += (
-                ", "
-                + _("aprobado ")
-                + str(delta.days + (delta.months * 31) + (delta.years * 365))
-                + _(" días")
-            )
+            delta = (date.today() - self.approved_date).days
+            data += ", " + _("aprobado ") + str(delta) + _(" días")
 
         web_base_url = self.env["ir.config_parameter"].get_param("web.base.url")
         self.html_info = (
@@ -165,7 +143,7 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
             + str(web_base_url)
             + "/web#id="
             + str(self.id)
-            + '&view_type=form&model=partner.sale.contract">ver</a>'
+            + '&view_type=form&model=partner.purchase.contract">ver</a>'
         )
 
     name = fields.Char(
@@ -173,7 +151,7 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
         required=True,
         index=True,
         readonly=True,
-        states={"draft": [("readonly", False)], "proform": [("readonly", False)]},
+        states={"received": [("readonly", False)], "scheduled": [("readonly", False)]},
     )
     user_id = fields.Many2one(
         "res.users",
@@ -191,11 +169,50 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
         size=64,
         index=True,
         readonly=True,
-        states={"draft": [("readonly", False)], "proform": [("readonly", False)]},
+        states={"received": [("readonly", False)], "scheduled": [("readonly", False)]},
         default="/",
         help="Número único del documento, "
-        "calculado automáticamente cuando se aprueba el documento.",
+        "calculado automáticamente cuando se aprueba.",
     )
+    company_id = fields.Many2one(
+        "res.company",
+        "Compañía",
+        required=True,
+        default=lambda s: s.env.user.company_id.id,
+        states={"received": [("readonly", False)], "scheduled": [("readonly", False)]},
+    )
+    partner_id = fields.Many2one(
+        "res.partner",
+        "Proveedor",
+        ondelete="restrict",
+        track_visibility="onchange",
+        index=True,
+        required=True,
+        readonly=True,
+        states={"received": [("readonly", False)], "scheduled": [("readonly", False)]},
+    )
+    supplier_ref = fields.Char(
+        "Referencia proveedor", size=256, help="Referencia del proveedor", required=True
+    )
+
+    reception_date = fields.Date(
+        "Fecha de recepción",
+        readonly=True,
+        default=lambda s: fields.Date.today(),
+        states={
+            "received": [("readonly", False), ("required", True)],
+            "scheduled": [("readonly", False), ("required", True)],
+        },
+    )
+    scheduled_date = fields.Date(
+        "Fecha planificada",
+        readonly=True,
+        states={
+            "received": [("readonly", False), ("required", False)],
+            "scheduled": [("readonly", False), ("required", True)],
+        },
+    )
+
     currency_id = fields.Many2one(
         "res.currency", "Moneda", related="company_id.currency_id"
     )
@@ -203,51 +220,37 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
         "res.currency", "Moneda Ad.", related="company_id.add_currency_id"
     )
     html_info = fields.Text(compute=_html_info, string="HTML Representation")
-    company_id = fields.Many2one(
-        "res.company",
-        "Compañía",
-        required=True,
-        default=lambda s: s.env.user.company_id.id,
-        states={
-            "draft": [("readonly", False)],
-            "proform": [("readonly", False)],
-            "approved": [("readonly", True)],
-            "active": [("readonly", True)],
-            "rejected": [("readonly", True)],
-            "done": [("readonly", True)],
-        },
-    )
-    partner_id = fields.Many2one(
-        "res.partner",
-        "Cliente",
-        ondelete="restrict",
-        track_visibility="onchange",
-        index=True,
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-    )
-    client_ref = fields.Char("Referencia cliente", size=256, help="Referencia cliente")
-    emission_date = fields.Date(
-        "Fecha de emisión",
-        readonly=True,
-        default=lambda s: fields.Date.today(),
-        states={"draft": [("readonly", False), ("required", True)]},
-    )
     approved_date = fields.Date(
-        "Fecha de aprobación", readonly=True, states={"proform": [("readonly", False)]}
+        "Fecha de aprobación",
+        readonly=True,
+        states={"received": [("readonly", False)], "scheduled": [("readonly", False)]},
     )
     activation_date = fields.Date(
-        "Fecha de activación", readonly=True, states={"approved": [("readonly", False)]}
-    )
-    expiration_date = fields.Date("Fecha de expiración", readonly=True)
-    rejected_date = fields.Date(
-        "Fecha de rechazo",
-        readonly=True,
+        "Fecha de activación",
         invisible=True,
+        readonly=True,
         states={
-            "proform": [("invisible", False), ("readonly", False)],
+            "received": [("invisible", True), ("readonly", True)],
+            "scheduled": [("invisible", True), ("readonly", True)],
+            "approved": [("invisible", False), ("readonly", False)],
+            "resent": [("invisible", False), ("readonly", False)],
+            "active": [("invisible", False), ("readonly", True)],
             "rejected": [("invisible", False), ("readonly", True)],
+            "done": [("invisible", False), ("readonly", True)],
+        },
+    )
+    expiration_date = fields.Date(
+        "Fecha de expiración",
+        invisible=True,
+        readonly=False,
+        states={
+            "received": [("invisible", True), ("readonly", True)],
+            "scheduled": [("invisible", True), ("readonly", True)],
+            "approved": [("invisible", False), ("readonly", True)],
+            "resent": [("invisible", False), ("readonly", True)],
+            "active": [("invisible", False), ("readonly", True)],
+            "rejected": [("invisible", False), ("readonly", True)],
+            "done": [("invisible", False), ("readonly", True)],
         },
     )
     close_date = fields.Date(
@@ -255,8 +258,8 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
         invisible=True,
         readonly=True,
         states={
-            "draft": [("invisible", True), ("readonly", True)],
-            "proform": [("invisible", True), ("readonly", True)],
+            "received": [("invisible", True), ("readonly", True)],
+            "scheduled": [("invisible", True), ("readonly", True)],
             "approved": [("invisible", True), ("readonly", True)],
             "active": [("invisible", True), ("readonly", True)],
             "rejected": [("invisible", True), ("readonly", True)],
@@ -268,37 +271,36 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
         "Estado",
         size=16,
         readonly=True,
-        default="draft",
+        default="received",
         track_visibility="onchange",
     )
-    description = fields.Text("Notas")
-    amount = fields.Float(
+    amount = fields.Monetary(
         string="Importe",
         readonly=True,
-        states={"draft": [("readonly", False)], "proform": [("readonly", False)]},
+        states={"received": [("readonly", False)], "scheduled": [("readonly", False)]},
     )
-    additional_amount = fields.Float(
+
+    additional_amount = fields.Monetary(
         string="Importe Ad.",
         readonly=True,
-        states={"draft": [("readonly", False)], "proform": [("readonly", False)]},
+        states={"received": [("readonly", False)], "scheduled": [("readonly", False)]},
     )
+    description = fields.Text("Notas")
     parent_id = fields.Many2one(
-        "partner.sale.frame.contract",
+        "partner.purchase.frame.contract",
         "Contrato padre",
-        default=lambda self: self.env.context["parent_id"]
-        if "parent_id" in self.env.context
-        else False,
         readonly=True,
-        states={"draft": [("readonly", False)], "proform": [("readonly", False)]},
+        states={"received": [("readonly", False)], "scheduled": [("readonly", False)]},
     )
     contract_type_id = fields.Many2one(
         "partner.contract.type",
         "Tipo de contrato",
         readonly=True,
-        states={"draft": [("readonly", False)], "proform": [("readonly", False)]},
+        states={"received": [("readonly", False)], "scheduled": [("readonly", False)]},
     )
+    supplier_type_id = fields.Many2one("supplier.type", "Tipo de Proveedor")
     supplement_ids = fields.One2many(
-        "partner.sale.supplement", "parent_id", "Suplementos"
+        "partner.purchase.supplement", "parent_id", "Suplementos"
     )
     supplement_count = fields.Integer(
         compute=_get_supplement_count, string="Número de suplementos"
@@ -309,31 +311,51 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
     term = fields.Integer(
         "Plazo",
         required=False,
-        readonly=True,
+        readonly=False,
         default=1,
-        states={"draft": [("readonly", False)]},
+        states={
+            "received": [("readonly", False)],
+            "scheduled": [("readonly", False)],
+            "approved": [("readonly", False)],
+            "resent": [("readonly", False)],
+            "active": [("readonly", True)],
+            "rejected": [("readonly", True)],
+            "done": [("readonly", True)],
+        },
     )
     term_date = fields.Date(
         "Fecha de término",
         required=False,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
+        states={"done": [("readonly", True)]},
     )
     term_type = fields.Selection(
         TERM_TYPE,
         "Término",
         required=True,
-        readonly=True,
+        readonly=False,
         default="fixed",
-        states={"draft": [("readonly", False)]},
+        states={
+            "active": [("readonly", True)],
+            "rejected": [("readonly", True)],
+            "done": [("readonly", True)],
+        },
     )
     term_uom = fields.Selection(
         TERM_UOM,
         "Término (UdM)",
         required=False,
-        readonly=True,
+        readonly=False,
         default="year",
-        states={"draft": [("readonly", False)]},
+        states={
+            "received": [("readonly", False)],
+            "scheduled": [("readonly", False)],
+            "approved": [("readonly", False)],
+            "resent": [("readonly", False)],
+            "active": [("readonly", True)],
+            "rejected": [("readonly", True)],
+            "done": [("readonly", True)],
+        },
     )
     term_action = fields.Selection(
         TERM_ACTION,
@@ -341,11 +363,19 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
         required=True,
         readonly=False,
         default="close",
-        states={"rejected": [("readonly", True)], "done": [("readonly", True)]},
+        states={
+            "received": [("invisible", False)],
+            "scheduled": [("readonly", False)],
+            "approved": [("readonly", False)],
+            "resent": [("readonly", False)],
+            "active": [("readonly", False)],
+            "rejected": [("readonly", True)],
+            "done": [("readonly", True)],
+        },
     )
     authorized_signature_ids = fields.One2many(
         "authorized.signature",
-        "partner_sale_contract_id",
+        "partner_purchase_contract_id",
         store=True,
         string="Firmas autorizadas",
         required=True,
@@ -389,35 +419,36 @@ hace %s días y aun no se ha obtenido respuesta.""" % str(
         vals.update({"user_id": self._uid})
         parent_id = vals.get("parent_id", False)
         if parent_id:
-            parent = self.env["partner.sale.frame.contract"].search(
+            parent = self.env["partner.purchase.frame.contract"].search(
                 [("id", "=", parent_id)]
             )
             if parent.state not in ("approved", "active"):
                 raise exceptions.Warning(
                     _("El contrato padre debe estar aprobado o activado")
                 )
-            if vals.get("emission_date") < parent.emission_date.strftime("%Y-%m-%d"):
+            if vals.get("reception_date") < parent.reception_date.strftime("%Y-%m-%d"):
                 raise exceptions.Warning(
                     _(
-                        """La fecha de emisión no
-puede ser menor que la fecha de emisión del padre"""
+                        """La fecha de recepción no puede
+                        ser menor que la fecha de recepción del padre"""
                     )
                 )
-        if vals.get("emission_date") > fields.Date.today().strftime("%Y-%m-%d"):
+        if vals.get("reception_date") > fields.Date.today().strftime("%Y-%m-%d"):
             raise exceptions.Warning(
-                _("La fecha de emisión no puede ser mayor que hoy")
+                _("La fecha de recepción no puede ser mayor que hoy")
             )
-        return super(SaleContract, self).create(vals)
+        return super(PartnerPurchaseContract, self).create(vals)
 
     def unlink(self):
-        if self.state != "draft":
+        if self.state != "received":
             raise exceptions.Warning(
-                _("No puede eliminar un contrato que no esté en estado Borrador.")
+                _("No puede eliminar un contrato sino está en estado Recibido.")
             )
 
-        return super(SaleContract, self).unlink()
+        return super(PartnerPurchaseContract, self).unlink()
 
     def extend(self):
+        self.ensure_one()
         if self.state == "active" and self.term_action == "extend":
             if self.term_type == "fixed":
                 if self.expiration_date and self.term and self.term_uom:
@@ -447,30 +478,29 @@ puede ser menor que la fecha de emisión del padre"""
                         new_expiration_date.strftime("%Y-%m-%d"),
                     )
                     self.message_post(body=message)
-        return True
 
     def write(self, vals):
-        if self.state in ("active", "done", "cancel"):
-            return super(SaleContract, self).write(vals)
+        if self.state in ("active", "done", "rejected"):
+            return super(PartnerPurchaseContract, self).write(vals)
         if vals.get(
-            "emission_date", self.emission_date.strftime("%Y-%m-%d")
+            "reception_date", self.reception_date.strftime("%Y-%m-%d")
         ) > date.today().strftime("%Y-%m-%d"):
             raise exceptions.Warning(
-                _("La fecha de emisión no puede ser mayor que hoy")
+                _("La fecha de recepción no puede ser mayor que hoy")
             )
         if vals.get("parent_id", False):
-            parent = self.env["partner.sale.frame.contract"].search(
+            parent = self.env["partner.purchase.frame.contract"].search(
                 [("id", "=", vals.get("parent_id", False))]
             )
             if parent.state not in ("approved", "active"):
                 raise exceptions.Warning(
-                    _("El contrato padre debe estar en estado Aprobado o Activo")
+                    _("El contrato padre debe estar aprobado o activo")
                 )
-            if vals.get("emission_date", self.emission_date) < parent.emission_date:
+            if vals.get("reception_date", self.reception_date) < parent.reception_date:
                 raise exceptions.Warning(
                     _(
-                        """La fecha de emisión no
-puede ser menor que la fecha de emisión del padre"""
+                        """La fecha de recepción no puede ser
+                        menor que la fecha de recepción del padre"""
                     )
                 )
 
@@ -500,16 +530,53 @@ puede ser menor que la fecha de emisión del padre"""
                     expiration_date = activation_date + relativedelta(days=int(term))
                 vals.update({"expiration_date": expiration_date})
 
-        return super(SaleContract, self).write(vals)
+        return super(PartnerPurchaseContract, self).write(vals)
 
-    def case_proform(self):
+    def case_reset(self):
+        self.ensure_one()
+        self.write({"state": "received"})
+
+    def case_resent(self):
+        self.ensure_one()
+        self.write({"state": "resent"})
+
+    def case_scheduled(self):
+        self.ensure_one()
         template = self.env.ref(
-            "alastor_partner_contract.email_template_sale_contract_proform",
+            "alastor_partner_contract.email_template_purchase_contract_scheduled",
             raise_if_not_found=False,
         )
+
+        if self.state == "received":
+            if not self.scheduled_date:
+                raise exceptions.Warning(
+                    _(
+                        "Debe establecer la fecha planificada para planificar el documento"
+                    )
+                )
+
+            if self.scheduled_date < self.reception_date:
+                raise exceptions.ValidationError(
+                    _(
+                        "La fecha planificada no puede ser anterior a la fecha de recepción"
+                    )
+                )
+
+            self.write({"state": "scheduled"})
+            if template:
+                self.with_context(force_send=True).message_post_with_template(
+                    template.id
+                )
+
+    def case_rejected(self):
+        template = self.env.ref(
+            "alastor_partner_contract.email_template_purchase_contract_rejected",
+            raise_if_not_found=False,
+        )
+
         for it in self:
-            if it.state == "draft":
-                it.write({"state": "proform"})
+            if it.state in ("received", "scheduled"):
+                it.write({"state": "rejected"})
                 if template:
                     it.with_context(force_send=True).message_post_with_template(
                         template.id
@@ -517,32 +584,47 @@ puede ser menor que la fecha de emisión del padre"""
 
     def case_approved(self):
         template = self.env.ref(
-            "alastor_partner_contract.email_template_sale_contract_approved",
+            "alastor_partner_contract.email_template_purchase_contract_approved",
             raise_if_not_found=False,
         )
+
         for it in self:
-            if it.state == "proform":
+            if it.state in ("received", "scheduled"):
                 if not it.approved_date:
                     raise exceptions.Warning(
                         _(
-                            "Debe establecer la fecha de aprobación para aprobar el documento"
+                            """Debe establecer
+                            la fecha de aprobación para aprobar el documento"""
                         )
                     )
-                if it.approved_date < it.emission_date:
+                if it.approved_date < it.reception_date:
                     raise exceptions.Warning(
                         _(
-                            "La fecha de aprobación no puede ser menor que la fecha de emisión"
+                            """La fecha de aprobación no puede
+                            ser anterior a la fecha de recepción"""
                         )
                     )
                 if it.approved_date > fields.Date.today():
                     raise exceptions.Warning(
-                        _("La fecha de aprobación no puede ser mayor que hoy")
+                        _(
+                            """La fecha de aprobación
+                            no puede ser mayor que hoy"""
+                        )
+                    )
+                if it.parent_id and it.parent_id.approved_date > it.approved_date:
+                    raise exceptions.Warning(
+                        _(
+                            """La fecha de aprobación no puede
+                            ser menor que la fecha de aprobación del padre"""
+                        )
                     )
 
                 # set the number by the sequence
-                if it.number == "" or self.number == "/":
-                    seq = self.env["ir.sequence"].next_by_code("partner.contract.sales")
-                    self.write({"number": seq})
+                if it.number == "" or it.number == "/":
+                    seq = self.env["ir.sequence"].next_by_code(
+                        "partner.contract.purchases"
+                    )
+                    it.write({"number": seq})
 
                 it.write({"state": "approved"})
                 if template:
@@ -552,41 +634,47 @@ puede ser menor que la fecha de emisión del padre"""
 
     def case_active(self):
         template = self.env.ref(
-            "alastor_partner_contract.email_template_sale_contract_active",
+            "alastor_partner_contract.email_template_purchase_contract_actived",
             raise_if_not_found=False,
         )
+
         for it in self:
-            if it.state == "approved":
+            if it.state in ("approved", "resent"):
                 if not it.activation_date:
                     raise exceptions.Warning(
                         _(
-                            "Debe establecer la fecha de activación para activar el documento"
+                            """Debe establecer la
+                            fecha de activación para activar el documento"""
                         )
                     )
                 if it.term_type == "until":
                     if not it.term_date:
                         raise exceptions.Warning(
                             _(
-                                "Debe establecer la fecha de término para activar el documento"
+                                """Debe establecer
+                                la fecha de término para activar el documento"""
                             )
                         )
                 if it.term_type == "fixed":
                     if not it.term:
                         raise exceptions.Warning(
-                            _("Debe establecer un término para activar el documento")
+                            _(
+                                """Debe establecer
+                                un término para activar el documento"""
+                            )
                         )
                     if not it.term_uom:
                         raise exceptions.Warning(
                             _(
-                                """Debe establecer la unidad
-de medida del término para activar el documento"""
+                                """Debe establecer
+                                la unidad de medida del término para activar el documento"""
                             )
                         )
                 if it.activation_date < it.approved_date:
                     raise exceptions.Warning(
                         _(
-                            """La fecha de activación no
-puede ser menor que la fecha de aprobación"""
+                            """La fecha de activación
+                            no puede ser menor que la fecha de aprobación"""
                         )
                     )
                 if it.activation_date > fields.Date.today():
@@ -594,59 +682,50 @@ puede ser menor que la fecha de aprobación"""
                         _("La fecha de activación no puede ser mayor que hoy")
                     )
                 if it.expiration_date:
-                    if it.activation_date > it.expiration_date:
+                    if self.activation_date > self.expiration_date:
                         raise exceptions.Warning(
                             _(
                                 """La fecha de expiración
-no puede ser menor que la fecha de activación"""
+                                no puede ser menor que la fecha de activación"""
                             )
                         )
-
+                message = _("El contrato '%s' ha sido activado.") % it.name
+                it.message_post(body=message)
                 it.write({"state": "active"})
                 if template:
                     it.with_context(force_send=True).message_post_with_template(
                         template.id
                     )
 
-    def case_rejected(self):
-        for it in self:
-            if it.state == "proform":
-                if not it.rejected_date:
-                    raise exceptions.Warning(
-                        _(
-                            "Debe establecer la fecha de rechazo para rechazar el documento"
-                        )
-                    )
-                if it.rejected_date < it.emission_date:
-                    raise exceptions.Warning(
-                        _(
-                            "La fecha de rechazo no puede ser menor que la fecha de emisión"
-                        )
-                    )
-                if it.rejected_date > fields.Date.today():
-                    raise exceptions.Warning(
-                        _("La fecha de rechazo no puede ser mayor que hoy")
-                    )
-
-                it.write({"state": "rejected"})
-
     def case_close(self):
-        if self.state == "active":
-            list_supplements = self.env["partner.sale.supplement"].search(
-                [("parent_id", "=", self.id), ("state", "not in", ["cancel", "done"])]
-            )
-            if len(list_supplements) > 0:
-                raise exceptions.Warning(
-                    _("No puede cerrar este contrato porque tiene suplementos.")
+        template = self.env.ref(
+            "alastor_partner_contract.email_template_purchase_contract_closed",
+            raise_if_not_found=False,
+        )
+
+        for it in self:
+            if it.state == "active":
+                list_supplements = self.env["partner.purchase.supplement"].search(
+                    [
+                        ("parent_id", "=", it.id),
+                        ("state", "not in", ["rejected", "done"]),
+                    ]
+                )
+                if len(list_supplements) > 0:
+                    raise exceptions.Warning(
+                        _("No puede cerrar este contrato porque tiene suplementos")
+                    )
+
+                message = _("El contrato '%s' ha sido cerrado.") % it.name
+                it.message_post(body=message)
+                it.write(
+                    {"close_date": date.today().strftime("%Y-%m-%d"), "state": "done"}
                 )
 
-            self.write(
-                {"close_date": date.today().strftime("%Y-%m-%d"), "state": "done"}
-            )
-
-    def case_reset(self):
-        self.ensure_one()
-        self.write({"state": "draft"})
+                if template:
+                    it.with_context(force_send=True).message_post_with_template(
+                        template.id
+                    )
 
     def name_get(self):
         if self._context.get("full_name", False):
@@ -665,7 +744,7 @@ no puede ser menor que la fecha de activación"""
                 )
             return result
 
-        return super(SaleContract, self).name_get()
+        return super(PartnerPurchaseContract, self).name_get()
 
     @api.model
     def name_search(
@@ -673,7 +752,7 @@ no puede ser menor que la fecha de activación"""
     ):
         if context is None:
             context = {}
-        ids = self.env["partner.sale.contract"].search(
+        ids = self.env["partner.purchase.contract"].search(
             ["|", ("number", operator, name), ("name", operator, name)] + args
         )
         return ids.name_get()

@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-  <data>
-
-    <menuitem
-      id='menu_contracts_root'
-      name='Contratación'
+    <data>
+        <menuitem
+      id="menu_contracts_root"
+      name="Contratación"
       sequence="20"
       web_icon="alastor_partner_contract,static/description/icon.png"
       groups="alastor_partner_contract.contract_sales_visor,alastor_partner_contract.contract_purchases_visor"
     />
 
-    <menuitem
+        <menuitem
       id="menu_partners"
       name="Entidades"
       parent="menu_contracts_root"
       sequence="1"
     />
 
-    <menuitem
+        <menuitem
       id="menu_partners_customers"
       name="Clientes"
       parent="menu_partners"
-      action="base.action_partner_customer_form"
+      action="alastor_partner_contract.res_partner_action_customer_contract_alastor"
       sequence="1"
     />
 
-    <menuitem
+        <menuitem
       id="menu_partners_suppliers"
       name="Proveedores"
       parent="menu_partners"
-      action="base.action_partner_supplier_form"
+      action="alastor_partner_contract.res_partner_action_supplier_contract_alastor"
       sequence="2"
     />
 
-    <menuitem
+        <menuitem
       id="menu_supplier_logistics"
       name="Proveedores Logistica"
       parent="menu_partners"
@@ -41,23 +40,23 @@
       sequence="3"
     />
 
-    <menuitem
-      name="Logística"
+        <menuitem
       id="menu_contract_purchases"
+      name="Logística"
       parent="menu_contracts_root"
       sequence="3"
       groups="alastor_partner_contract.contract_purchases_visor"
     />
 
-    <menuitem
-      name="Comercial"
+        <menuitem
       id="menu_contract_sales"
+      name="Comercial"
       parent="menu_contracts_root"
       groups="alastor_partner_contract.contract_sales_visor"
       sequence="4"
     />
 
-    <menuitem
+        <menuitem
       id="menu_reports"
       name="Informes"
       parent="menu_contracts_root"
@@ -65,13 +64,19 @@
       sequence="5"
     />
 
-    <menuitem
-      name="Configuración"
+        <menuitem
       id="menu_contracts_configuration"
+      name="Configuración"
       parent="menu_contracts_root"
       groups="alastor_partner_contract.contract_sales_visor"
       sequence="6"
     />
 
-  </data>
+        <menuitem
+      id="menu_country_state_partner"
+      action="base.action_country_state"
+      parent="contacts.menu_localisation"
+      sequence="5"
+    />
+    </data>
 </odoo>

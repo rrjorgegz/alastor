@@ -1,7 +1,7 @@
 from odoo import fields, models
 
 
-class ConfigSettings(models.TransientModel):
+class ResConfigSettings(models.TransientModel):
     _inherit = ["res.config.settings"]
 
     group_sales_frame_contracts = fields.Boolean(
